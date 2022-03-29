@@ -1,0 +1,33 @@
+.main {
+  font-family: "Lobster", cursive;
+  height: 100vh;
+}
+.meum_bar {
+  font-family: "Lobster", cursive;
+}
+.gtnews_logo {
+  font-size: 0px;
+  height: 100px;
+  padding: 5px 0;
+  width: 100px;
+}
+.gtnewslogo {
+  filter: brightness(120%);
+  height: 100%;
+  display: block;
+}
+
+.menu-appbar,
+.game,
+.datetime,
+.favorite,
+.notice,
+.account,
+.setting,
+.tech {
+  text-align: center;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lobster", cursive;
+}
