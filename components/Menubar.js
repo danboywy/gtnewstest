@@ -97,21 +97,7 @@ export default function Menubar({ check, change }) {
               </Link>
             </div>}
           </Grid>
-          {/*
-          <Grid
-            item
-            xs={1}
-            container
-            alignItems="center"
-            justifyContent="center"
-          >
-            <div className={styles.notice}>
-              <AddAlarmIcon sx={{ color: "#2196f3", fontSize: 50 }} />
-              <br></br>
-              <span className={styles.iconaccounttext}>Notice</span>
-            </div>
-          </Grid>
-          */}
+         
           <Grid
             item
             xs={1}
