@@ -6,5 +6,8 @@ const nextConfig = {
 module.exports = nextConfig
 
 module.exports = {
-  distDir: 'build',
+  future: {
+    webpack5: true,
+  },
+  target: 'serverless'
 }
