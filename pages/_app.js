@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import Menubar from "../components/Menubar";
-
+import {AuthContextProvider} from '../stores/authContext'
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -19,20 +19,20 @@ function MyApp({ Component, pageProps }) {
     palette: {
       type: darkMode ? "dark" : "light"
     }
-    
   });
 
   return (
+    
+    <AuthContextProvider>
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "200vh" }}>
-        {/*<Paper>*/}
+
         <Menubar check={darkMode} change={() => setDarkMode(!darkMode)} />
 
         <Component {...pageProps} />
       </Paper>
-    </ThemeProvider>
+    </ThemeProvider></AuthContextProvider>
   );
-  // return <Component {...pageProps} />;
 }
 
 export default MyApp;

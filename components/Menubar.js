@@ -14,12 +14,14 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
-
+import {useContext} from 'react'
+import AuthContext from '../stores/authContext'
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function Menubar({ check, change }) {
+  const {user, login}=useContext(AuthContext)
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -129,7 +131,7 @@ export default function Menubar({ check, change }) {
                 />
               </IconButton>
               <br></br>
-              <span className={styles.iconaccounttext}>Account</span>
+              <span onClick={login} className={styles.iconaccounttext}>Account</span>
             </div>
 
             <Menu
