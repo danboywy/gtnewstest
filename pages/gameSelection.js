@@ -16,7 +16,7 @@ var clickFlag = {
 function toggle(id) {
   // console.log("clicked " + id);
 
-  const num = parseInt(id);
+  const num = parseInt(id, 10);
   const cat = id.replace(/[0-9]/g, "");
 
   // console.log(num);
@@ -35,8 +35,7 @@ function toggle(id) {
   // console.log(clickFlag);
 }
 
-const Game = ({ images, key, id }) => {
-  const index = key;
+const Game = ({ images, index, id }) => {
   const idNum = index + id;
 
   return (
@@ -70,7 +69,7 @@ const GameRow = ({ images, text }) => {
         <h1 style={{ textAlign: "center" }}>{text}</h1>
         <Grid container justifyContent="center" spacing={4}>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((value) => (
-            <Game images={images} key={value} id={text} />
+            <Game images={images} index={value} id={text} key={value + text} />
           ))}
         </Grid>
       </Grid>
