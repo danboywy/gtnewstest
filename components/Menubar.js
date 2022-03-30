@@ -10,10 +10,13 @@ import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import AddAlarmIcon from "@mui/icons-material/AddAlarm";
 import Datetime from "./Datetime";
 import IconButton from "@mui/material/IconButton";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
+import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
 import AuthContext from '../stores/authContext'
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -56,13 +59,14 @@ export default function Menubar({ check, change }) {
             <Switch checked={check} onChange={change} />
             <span className={styles.switchtext}>Dark mode</span>
           </Grid>
+         
           <Grid
             item
             xs={1}
             container
             alignItems="center"
             justifyContent="center"
-          >
+          > {user &&
             <div className={styles.tech}>
               <Link href="/techNews">
                 <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
@@ -71,7 +75,7 @@ export default function Menubar({ check, change }) {
               <Link href="/techNews">
                 <span className={styles.icontechtext}>Tech</span>
               </Link>
-            </div>
+            </div>}
           </Grid>
           <Grid
             item
@@ -79,7 +83,7 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          >
+          > {user &&
             <div className={styles.game}>
               <Link href="/gameNews">
                 <SportsEsportsOutlinedIcon
@@ -90,7 +94,7 @@ export default function Menubar({ check, change }) {
               <Link href="/gameNews">
                 <span className={styles.icongametext}>Game</span>
               </Link>
-            </div>
+            </div>}
           </Grid>
           {/*
           <Grid
@@ -113,12 +117,12 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          >
+          > {user &&
             <div className={styles.favorite}>
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
               <span className={styles.iconaccounttext}>Favorites</span>
-            </div>
+            </div>}
           </Grid>
           <Grid
             item
@@ -126,7 +130,7 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          >
+          > {user &&
             <div className={styles.account}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {" "}
@@ -135,9 +139,17 @@ export default function Menubar({ check, change }) {
                 />
               </IconButton>
               <br></br>
-              <span onClick={login} className={styles.iconaccounttext}>Account</span>
-            </div>
+              <span className={styles.iconaccounttext}>Account</span>
+            </div>}
 
+             {/*-----------login----------*/}
+          
+          {!user &&
+            <div className={styles.notice}>
+              <LoginIcon onClick={login} sx={{ color: "#2196f3", fontSize: 50 }} />
+              <br></br>
+              <span onClick={login} className={styles.iconaccounttext}>Login</span>
+            </div>}
             <Menu
               sx={{ mt: "80px" }}
               id="menu-appbar"
@@ -152,19 +164,16 @@ export default function Menubar({ check, change }) {
                 horizontal: "right"
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              onClose={handleCloseUserMenu}>
+        <MenuItem onClick={logout}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
           </Grid>
-          <Grid item xs={1} container>
-                  <li onClick={logout}>logout</li>
-          </Grid>
-        </Grid>
+   </Grid>
       </Box>
     </div>
   );
