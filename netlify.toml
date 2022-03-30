@@ -3,7 +3,5 @@
   publish = ".next"
 [[redirects]]
   from = "/*"
-  to = "/404"
-  status = 404
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  to = "/index.html"
+  status = 200
