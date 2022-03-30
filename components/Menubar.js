@@ -86,6 +86,7 @@ export default function Menubar({ check, change }) {
               </Link>
             </div>
           </Grid>
+          {/*
           <Grid
             item
             xs={1}
@@ -99,6 +100,7 @@ export default function Menubar({ check, change }) {
               <span className={styles.iconaccounttext}>Notice</span>
             </div>
           </Grid>
+          */}
           <Grid
             item
             xs={1}
@@ -109,7 +111,7 @@ export default function Menubar({ check, change }) {
             <div className={styles.favorite}>
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
-              <span className={styles.iconaccounttext}>Favorite</span>
+              <span className={styles.iconaccounttext}>Favorites</span>
             </div>
           </Grid>
           <Grid

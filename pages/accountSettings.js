@@ -62,18 +62,10 @@ export default function accountSettings() {
             Change Profile Picture
           </Button>
           <Button
-            name="password"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            View Likes and Comments
-          </Button>
-          <Button
             name="return"
             fullWidth
             variant="contained"
-            href="https://tc00kd.sse.codesandbox.io/"
+            href="mainpage"
             sx={{ mt: 3, mb: 2 }}
           >
             Return

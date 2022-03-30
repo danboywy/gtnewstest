@@ -23,13 +23,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "100vh" }}>
+      <Paper style={{ height: "200vh" }}>
+        {/*<Paper>*/}
         <Menubar check={darkMode} change={() => setDarkMode(!darkMode)} />
 
         <Component {...pageProps} />
       </Paper>
     </ThemeProvider>
   );
+  // return <Component {...pageProps} />;
 }
 
 export default MyApp;

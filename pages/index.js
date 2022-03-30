@@ -1,7 +1,14 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Link from "next/link";
 import * as React from "react";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
+const theme = createTheme();
 
 export default function Home() {
   return (
@@ -12,9 +19,47 @@ export default function Home() {
         <link rel="icon" href="/GTNEWS.png" />
       </Head>
       <main className={styles.main}>
-        <h1 className="title">
-          <Link href="/mainpage">Welcome Page</Link>
-        </h1>
+        <ThemeProvider theme={theme}>
+          <Container component="main">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+            >
+              <Typography component="h1" variant="h5">
+                Welcome to GTNews!
+              </Typography>
+              <Typography textAlign="center">
+                The go-to hub for news about your favorite games and tech
+                companies! Create an account to begin personalizing your news.
+              </Typography>
+              <Container maxWidth="xs">
+                <Button
+                  name="LogIn"
+                  fullWidth
+                  variant="contained"
+                  href="signIn"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Log In
+                </Button>
+                <Button
+                  name="createAccount"
+                  fullWidth
+                  variant="contained"
+                  href="signUp"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Create Account
+                </Button>
+              </Container>
+            </Box>
+          </Container>
+        </ThemeProvider>
       </main>
     </div>
   );
