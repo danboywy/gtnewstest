@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }) {
     palette: {
       type: darkMode ? "dark" : "light"
     }
+    
   });
 
   return (
