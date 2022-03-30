@@ -6,8 +6,6 @@ const nextConfig = {
 module.exports = nextConfig
 
 module.exports = {
-  future: {
-    webpack5: true,
-  },
-  target: 'serverless'
-}
+  // other exports
+  target: 'serverless', // add this line
+};
