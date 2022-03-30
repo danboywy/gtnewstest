@@ -162,14 +162,14 @@ export default function gameSelectionPage() {
         >
           Next
         </Button>
-        <Button
+        {/*<Button
           type="submit"
           variant="contained"
-          href="/signUp"
+          href="/index"
           sx={{ mt: 3, mb: 2, float: "right" }}
         >
           Back
-        </Button>
+        </Button>*/}
       </div>
 
       <div>
