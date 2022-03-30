@@ -23,7 +23,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function Menubar({ check, change }) {
   //login
-  const {user, login, logout}=useContext(AuthContext)
+  const {user, login, logout, authReady}=useContext(AuthContext)
   console.log(user)
 
 
@@ -66,7 +66,8 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          > {user &&
+            
+          > {user && 
             <div className={styles.tech}>
               <Link href="/techNews">
                 <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
@@ -165,12 +166,14 @@ export default function Menubar({ check, change }) {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+      
         <MenuItem onClick={logout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
+    
       </Menu>
           </Grid>
    </Grid>
