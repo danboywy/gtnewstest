@@ -7,10 +7,12 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
+import {useContext} from 'react'
+import AuthContext from '../stores/authContext'
 const theme = createTheme();
 
 export default function Home() {
+  const {user, login, logout}=useContext(AuthContext)
   return (
     <div className={styles.container}>
       <Head>
@@ -37,6 +39,7 @@ export default function Home() {
                 The go-to hub for news about your favorite games and tech
                 companies! Create an account to begin personalizing your news.
               </Typography>
+              {!user &&
               <Container maxWidth="xs">
                 <Button
                   name="LogIn"
@@ -56,7 +59,22 @@ export default function Home() {
                 >
                   Create Account
                 </Button>
-              </Container>
+              </Container>}
+
+              {user &&
+              <Container maxWidth="xs">
+               <Button
+                  name="gameSelection"
+                  fullWidth
+                  variant="contained"
+                  href="gameSelection"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  gameSelection
+                </Button>
+                
+              </Container>}
+              
             </Box>
           </Container>
         </ThemeProvider>

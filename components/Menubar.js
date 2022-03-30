@@ -19,7 +19,7 @@ import Switch from "@mui/material/Switch";
 import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
 import AuthContext from '../stores/authContext'
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 
 export default function Menubar({ check, change }) {
   //login
@@ -150,6 +150,7 @@ export default function Menubar({ check, change }) {
               <LoginIcon onClick={login} sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
               <span onClick={login} className={styles.iconaccounttext}>Login</span>
+              
             </div>}
             <Menu
               sx={{ mt: "80px" }}
