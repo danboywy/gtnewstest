@@ -23,7 +23,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function Menubar({ check, change }) {
   //login
-  const {user, login, logout, authReady}=useContext(AuthContext)
+  const {user, login, logout}=useContext(AuthContext)
   console.log(user)
 
 
@@ -167,15 +167,16 @@ export default function Menubar({ check, change }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
       
-        <MenuItem onClick={logout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-    
-      </Menu>
+            <MenuItem onClick={logout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+        
+            </Menu>
           </Grid>
+        
    </Grid>
       </Box>
     </div>
