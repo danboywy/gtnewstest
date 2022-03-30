@@ -12,7 +12,7 @@ import AuthContext from '../stores/authContext'
 const theme = createTheme();
 
 export default function Home() {
-  const {user, login, logout}=useContext(AuthContext)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -39,7 +39,7 @@ export default function Home() {
                 The go-to hub for news about your favorite games and tech
                 companies! Create an account to begin personalizing your news.
               </Typography>
-            
+              
               <Container maxWidth="xs">
                 <Button
                   name="LogIn"
@@ -61,7 +61,18 @@ export default function Home() {
                 </Button>
               </Container>
 
-             
+              <Container maxWidth="xs">
+               <Button
+                  name="gameSelection"
+                  fullWidth
+                  variant="contained"
+                  href="gameSelection"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  gameSelection
+                </Button>
+                
+              </Container>
               
             </Box>
           </Container>
