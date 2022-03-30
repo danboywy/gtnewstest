@@ -19,7 +19,11 @@ import AuthContext from '../stores/authContext'
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function Menubar({ check, change }) {
-  const {user, login}=useContext(AuthContext)
+  //login
+  const {user, login, logout}=useContext(AuthContext)
+  console.log(user)
+
+
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   
   const handleOpenUserMenu = (event) => {
@@ -156,6 +160,9 @@ export default function Menubar({ check, change }) {
                 </MenuItem>
               ))}
             </Menu>
+          </Grid>
+          <Grid item xs={1} container>
+                  <li onClick={logout}>logout</li>
           </Grid>
         </Grid>
       </Box>
