@@ -25,7 +25,7 @@ function toggle(id) {
   if (clickFlag[cat][num] === false) {
     clickFlag[cat][num] = true;
     document.getElementById(id).style.outlineColor = "#1c74ec";
-    document.getElementById(id).style.outlineWidth = "5px";
+    document.getElementById(id).style.outlineWidth = "6px";
   } else {
     clickFlag[cat][num] = false;
     document.getElementById(id).style.outlineColor = "black";
