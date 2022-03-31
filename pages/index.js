@@ -49,7 +49,7 @@ export default function Home() {
                   href="signIn"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign Out/Log In
+                  Sign Up/Log In
                 </Button>
                 
               </Container>}
