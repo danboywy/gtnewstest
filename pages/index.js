@@ -12,7 +12,8 @@ import AuthContext from '../stores/authContext'
 const theme = createTheme();
 
 export default function Home() {
-  const {user}=useContext(AuthContext)
+  const {user,login}=useContext(AuthContext)
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -41,24 +42,16 @@ export default function Home() {
               </Typography>
               {!user &&
               <Container maxWidth="xs">
-                <Button
+                <Button onClick={login}
                   name="LogIn"
                   fullWidth
                   variant="contained"
                   href="signIn"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Log In
+                  Sign Out/Log In
                 </Button>
-                <Button
-                  name="createAccount"
-                  fullWidth
-                  variant="contained"
-                  href="signUp"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Create Account
-                </Button>
+                
               </Container>}
 
               {user &&

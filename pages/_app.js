@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
     
     <AuthContextProvider>
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "200vh" }}>
+      <Paper style={{ height: "100%" }}>
 
         <Menubar check={darkMode} change={() => setDarkMode(!darkMode)} />
 
