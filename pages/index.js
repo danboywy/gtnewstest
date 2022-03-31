@@ -7,13 +7,13 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {useContext} from 'react'
-import AuthContext from '../stores/authContext'
+import { useContext } from "react";
+import AuthContext from "../stores/authContext";
 const theme = createTheme();
 
 export default function Home() {
-  const {user,login}=useContext(AuthContext)
-  
+  const { user, login } = useContext(AuthContext);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -40,34 +40,42 @@ export default function Home() {
                 The go-to hub for news about your favorite games and tech
                 companies! Create an account to begin personalizing your news.
               </Typography>
-              {!user &&
-              <Container maxWidth="xs">
-                <Button onClick={login}
-                  name="LogIn"
-                  fullWidth
-                  variant="contained"
-                  href="signIn"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign Up/Log In
-                </Button>
-                
-              </Container>}
+              {!user && (
+                <Container maxWidth="xs">
+                  <Button
+                    onClick={login}
+                    name="LogIn"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign Up/Log In
+                  </Button>
+                </Container>
+              )}
 
-              {user &&
-              <Container maxWidth="xs">
-               <Button
-                  name="gameSelection"
-                  fullWidth
-                  variant="contained"
-                  href="gameSelection"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  gameSelection
-                </Button>
-                
-              </Container>}
-              
+              {user && (
+                <div>
+                  <br></br>
+                  <br></br>
+                  <Typography textAlign="center">
+                    Now that you are all set up with an account, choose some
+                    video games and technology companies to follow so we can
+                    show you news based on your interests!
+                  </Typography>
+                  <Container maxWidth="xs">
+                    <Button
+                      name="gameSelection"
+                      fullWidth
+                      variant="contained"
+                      href="gameSelection"
+                      sx={{ mt: 3, mb: 2 }}
+                    >
+                      Choose Games/Tech To Follow
+                    </Button>
+                  </Container>
+                </div>
+              )}
             </Box>
           </Container>
         </ThemeProvider>

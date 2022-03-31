@@ -19,6 +19,7 @@ import Switch from "@mui/material/Switch";
 import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
 import AuthContext from '../stores/authContext'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 export default function Menubar({ check, change }) {
@@ -42,7 +43,7 @@ export default function Menubar({ check, change }) {
         <Grid item xs={12} container>
           <Grid item xs={0.5} container></Grid>
           <Grid item md={2} lg={1} container alignItems="center">
-            <Link href="/mainpage">
+            <Link href="/">
               <div className={styles.gtnews_logo}>
                 <img
                   className={styles.gtnewslogo}
@@ -153,7 +154,15 @@ export default function Menubar({ check, change }) {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-      
+                <Link href="/accountSettings">
+            <MenuItem>
+              <ListItemIcon>
+                
+                <ManageAccountsIcon fontSize="small" />
+              
+              </ListItemIcon>
+              Setting
+            </MenuItem></Link>
             <MenuItem onClick={logout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
