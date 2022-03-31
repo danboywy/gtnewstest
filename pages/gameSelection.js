@@ -136,7 +136,7 @@ export default function gameSelectionPage() {
   return (
     <div>
       <div>
-        <div style={{ margin: "1em 0 0 1em" }}>
+        {/*<div style={{ margin: "1em 0 0 1em" }}>
           <img
             src="GTNEWS.png"
             alt="GTNews"
@@ -144,7 +144,7 @@ export default function gameSelectionPage() {
             height="100"
             style={{ float: "left" }}
           ></img>
-        </div>
+        </div>*/}
 
         {/*<div>
           <TextField

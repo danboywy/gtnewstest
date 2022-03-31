@@ -95,7 +95,7 @@ export default function techSelectionPage() {
   return (
     <div>
       <div>
-        <div style={{ margin: "1em 0 0 1em" }}>
+        {/*<div style={{ margin: "1em 0 0 1em" }}>
           <img
             src="GTNEWS.png"
             alt="GTNews"
@@ -103,12 +103,12 @@ export default function techSelectionPage() {
             height="100"
             style={{ float: "left" }}
           ></img>
-        </div>
+  </div>*/}
 
         <Button
           type="submit"
           variant="contained"
-          href="/"
+          href="/techNews"
           sx={{ mt: 3, mb: 2, ml: 1, mr: 2, float: "right" }}
         >
           Done
