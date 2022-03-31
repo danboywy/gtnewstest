@@ -44,28 +44,37 @@ export default function accountSettings() {
             Change Password
           </Button>
           <Button
-            name="password"
+            name="email"
             fullWidth
             variant="contained"
-            href="changeName"
+            href=""
             sx={{ mt: 3, mb: 2 }}
           >
-            Change Username
+            Change Email
           </Button>
           <Button
-            name="password"
+            name="likedGames"
             fullWidth
             variant="contained"
             href="changePic"
             sx={{ mt: 3, mb: 2 }}
           >
-            Change Profile Picture
+            Change Liked Games
+          </Button>
+          <Button
+            name="likedTech"
+            fullWidth
+            variant="contained"
+            href="changePic"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Change Liked Tech
           </Button>
           <Button
             name="return"
             fullWidth
             variant="contained"
-            href="mainpage"
+            href="gameNews"
             sx={{ mt: 3, mb: 2 }}
           >
             Return
