@@ -14,6 +14,7 @@ import { useRef, } from "react";
 import { signup, login, logout, useAuth } from "../stores/firebase";
 import { useRouter } from 'next/router'
 import { createContext,useEffect, useState } from "react"
+import { Paper } from "@material-ui/core";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -72,6 +73,7 @@ export default function SignIn() {
   }
   return (
     <ThemeProvider theme={theme}>
+        <Paper style={{ height: "100vh" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -145,7 +147,7 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+      </Container></Paper>
     </ThemeProvider>
   );
 }

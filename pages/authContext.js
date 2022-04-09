@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRef, } from "react";
 import { signup, login, logout, useAuth } from "../stores/firebase";
 import { useRouter } from 'next/router'
+import { Paper } from "@material-ui/core";
 
 function Copyright(props) {
     return (
@@ -78,6 +79,7 @@ function Copyright(props) {
   
     return (
       <ThemeProvider theme={theme}>
+         <Paper style={{ height: "100vh" }}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -140,7 +142,7 @@ function Copyright(props) {
             </Box>
           </Box>
           <Copyright sx={{ mt: 5 }} />
-        </Container>
+        </Container></Paper>
       </ThemeProvider>
     );
   }
