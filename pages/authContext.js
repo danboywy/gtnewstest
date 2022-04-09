@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRef, } from "react";
 import { signup, login, logout, useAuth } from "../stores/firebase";
-
+import { useRouter } from 'next/router'
 
 function Copyright(props) {
     return (
@@ -34,7 +34,7 @@ function Copyright(props) {
   const theme = createTheme();
   
   export default function SignUp() {
-    
+    const router = useRouter()
     
     const [ loading, setLoading ] = useState(false);
   const currentUser = useAuth();
@@ -46,6 +46,7 @@ function Copyright(props) {
     setLoading(true);
      try {
       await signup(emailRef.current.value, passwordRef.current.value);
+      router.push('../gameSelection')
      } catch {
        alert("Error!");
     }
@@ -56,11 +57,13 @@ function Copyright(props) {
     setLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
+      router.push('/')
     } catch {
       alert("Error!");
     }
     setLoading(false);
-  }
+}
+    
 
   async function handleLogout() {
     setLoading(true);
@@ -118,7 +121,7 @@ function Copyright(props) {
                   />
                 </Grid>
               </Grid>  
-              
+             
               <Button 
                 fullWidth
                 variant="contained"
