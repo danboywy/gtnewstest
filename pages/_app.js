@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import Menubar from "../components/Menubar";
-import {AuthContextProvider} from '../stores/authContext'
+import {AuthContextProvider} from './authContext'
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     
-    <AuthContextProvider>
+
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100%" }}>
 
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 
         <Component {...pageProps} />
       </Paper>
-    </ThemeProvider></AuthContextProvider>
+    </ThemeProvider>
   );
 }
 

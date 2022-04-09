@@ -18,18 +18,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
 import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
-import AuthContext from '../stores/authContext'
+import {useAuth, logout} from '../stores/firebase'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 export default function Menubar({ check, change }) {
-  //login
-  const {user, login, logout}=useContext(AuthContext)
-  console.log(user)
-
+  const currentUser = useAuth();
+  async function handleLogout() {
+      await logout();
+  }
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -68,8 +67,8 @@ export default function Menubar({ check, change }) {
             alignItems="center"
             justifyContent="center"
             
-          > {user && 
-            <div className={styles.tech}>
+          > {currentUser &&
+            <div className={styles.tech} >
               <Link href="/techNews">
                 <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               </Link>
@@ -85,7 +84,7 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          > {user &&
+          > {currentUser &&
             <div className={styles.game}>
               <Link href="/gameNews">
                 <SportsEsportsOutlinedIcon
@@ -105,7 +104,7 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          > {user &&
+          > {currentUser &&
             <div className={styles.favorite}>
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
@@ -118,9 +117,9 @@ export default function Menubar({ check, change }) {
             container
             alignItems="center"
             justifyContent="center"
-          > {user &&
+          > {currentUser &&
             <div className={styles.account}>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {" "}
                 <AccountCircleOutlinedIcon
                   sx={{ color: "#2196f3", fontSize: 50 }}
@@ -132,13 +131,14 @@ export default function Menubar({ check, change }) {
 
              {/*-----------login----------*/}
           
-          {!user &&
+             {!currentUser &&
+             <Link href="/authContext">
             <div className={styles.notice}>
-              <LoginIcon onClick={login} sx={{ color: "#2196f3", fontSize: 50 }} />
+              <LoginIcon  sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
-              <span onClick={login} className={styles.iconaccounttext}>Login</span>
+              <span className={styles.iconaccounttext}>Login</span>
               
-            </div>}
+            </div></Link>}
             <Menu
               sx={{ mt: "80px" }}
               id="menu-appbar"
@@ -163,12 +163,13 @@ export default function Menubar({ check, change }) {
               </ListItemIcon>
               Setting
             </MenuItem></Link>
-            <MenuItem onClick={logout}>
+            <Link href="/" variant="body2"> 
+            <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
               Logout
-            </MenuItem>
+            </MenuItem></Link>
         
             </Menu>
           </Grid>
