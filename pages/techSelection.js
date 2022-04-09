@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -9,8 +9,107 @@ var clickFlag = {
   GameDevelopers: [false, false, false, false, false, false, false, false]
 };
 
+const tech = {
+  BigTech: ["Apple", "Tesla", "Amazon", "Microsoft", "Netflix"],
+  Hardware: ["Nvidia", "Intel", "AMD", "Cisco", "Dell"],
+  GameDevelopers: [
+    "Valve",
+    "Activision Blizzard",
+    "Rockstar Games",
+    "Epic Games",
+    "Ubisoft"
+  ]
+};
+
+const categories = ["BigTech", "Hardware", "GameDevelopers"];
+
+function getList() {
+  var techList = [];
+  var gameList = [];
+
+  for (var i = 0; i < categories.length; i++) {
+    for (var j = 0; j < tech["BigTech"].length; j++) {
+      if (clickFlag[categories[i]][j] === true) {
+        techList.push(tech[categories[i]][j]);
+      }
+    }
+  }
+
+  const games = {
+    Shooter: [
+      "Counter-Strike: Global Offensive",
+      "Valorant",
+      "Apex Legends",
+      "Fortnite",
+      "Halo Infinite",
+      "Tom Clancy's Rainbow Six Siege",
+      "Overwatch",
+      "Destiny 2"
+    ],
+    MOBA: [
+      "League of Legends",
+      "Dota 2",
+      "Smite",
+      "Heroes of the Storm",
+      "Paladins",
+      "Arena of Valor",
+      "Battlerite",
+      "Vainglory"
+    ],
+    Sports: [
+      "FIFA 22",
+      "NBA 2K22",
+      "Riders Republic",
+      "Madden NFL 21",
+      "Rocket League",
+      "EA Sports UFC 4",
+      "MLB The Show 21",
+      "Tony Hawk's Pro Skater 1 + 2"
+    ],
+    RPG: [
+      "Elden Ring",
+      "Assassin's Creed Valhalla",
+      "Fallout 4",
+      "The Witcher 3: Wild Hunt",
+      "The Elder Scrolls V: Skyrim",
+      "The Legend of Zelda: Breath of the Wild",
+      "Dark Souls 3",
+      "Stardew Valley"
+    ],
+    Racing: [
+      "Forza Horizon 5",
+      "Need for Speed Heat",
+      "Dirt 5",
+      "TrackMania",
+      "iRacing",
+      "Gran Turismo 7",
+      "Project CARS",
+      "F1 2020"
+    ]
+  };
+  const gameCategories = ["Shooter", "MOBA", "Sports", "RPG", "Racing"];
+
+  const data = window.localStorage.getItem("current_game_selection");
+  if (data !== null) {
+    const selectedGames = JSON.parse(data);
+
+    for (i = 0; i < gameCategories.length; i++) {
+      for (j = 0; j < games["Shooter"].length; j++) {
+        if (selectedGames[gameCategories[i]][j] === true) {
+          gameList.push(games[gameCategories[i]][j]);
+        }
+      }
+    }
+  }
+
+  console.log(gameList);
+  console.log(techList);
+
+  // localStorage.clear();
+}
+
 function toggle(id) {
-  console.log("clicked " + id);
+  // console.log("toggled " + id);
 
   const num = parseInt(id, 10);
   const cat = id.replace(/[0-9]/g, "");
@@ -18,11 +117,21 @@ function toggle(id) {
   if (clickFlag[cat][num] === false) {
     clickFlag[cat][num] = true;
     document.getElementById(id).style.outlineColor = "#1c74ec";
-    document.getElementById(id).style.outlineWidth = "7px";
+    document.getElementById(id).style.outlineWidth = "6px";
   } else {
     clickFlag[cat][num] = false;
     document.getElementById(id).style.outlineColor = "black";
     document.getElementById(id).style.outlineWidth = "3px";
+  }
+}
+
+function updateCurrentSelection(selectedTech) {
+  for (var i = 0; i < categories.length; i++) {
+    for (var j = 0; j < clickFlag["BigTech"].length; j++) {
+      if (selectedTech[categories[i]][j] === true) {
+        toggle(j + categories[i]);
+      }
+    }
   }
 }
 
@@ -67,7 +176,7 @@ const GameRow = ({ images, text }) => {
   );
 };
 
-export default function techSelectionPage() {
+export default function TechSelectionPage() {
   const bigTech = [
     "data:image/png;base64,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",
     "https://cdn.mos.cms.futurecdn.net/BQwukuZwwwXrg27B9Le2Q6.png",
@@ -92,23 +201,36 @@ export default function techSelectionPage() {
     "https://1000logos.net/wp-content/uploads/2020/06/Ubisoft-Logo.png"
   ];
 
+  const [currentSelection, setCurrentSelection] = useState({
+    BigTech: [false, false, false, false, false, false, false, false],
+    Hardware: [false, false, false, false, false, false, false, false],
+    GameDevelopers: [false, false, false, false, false, false, false, false]
+  });
+
+  // called when page loads
+  useEffect(() => {
+    const data = window.localStorage.getItem("current_tech_selection");
+    if (data !== null) {
+      setCurrentSelection(JSON.parse(data));
+      updateCurrentSelection(JSON.parse(data));
+    }
+  }, []);
+
+  // called when currentSelection is updated
+  useEffect(() => {
+    window.localStorage.setItem(
+      "current_tech_selection",
+      JSON.stringify(currentSelection)
+    );
+  }, [currentSelection]);
+
   return (
     <div>
       <div>
-        {/*<div style={{ margin: "1em 0 0 1em" }}>
-          <img
-            src="GTNEWS.png"
-            alt="GTNews"
-            width="110"
-            height="100"
-            style={{ float: "left" }}
-          ></img>
-  </div>*/}
-
         <Button
           type="submit"
           variant="contained"
-          href="/techNews"
+          onClick={() => getList()}
           sx={{ mt: 3, mb: 2, ml: 1, mr: 2, float: "right" }}
         >
           Done
@@ -117,6 +239,7 @@ export default function techSelectionPage() {
           type="submit"
           variant="contained"
           href="/gameSelection"
+          onClick={() => setCurrentSelection(clickFlag)}
           sx={{ mt: 3, mb: 2, float: "right" }}
         >
           Back
