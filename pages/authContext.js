@@ -120,18 +120,7 @@ function Copyright(props) {
                     autoComplete="new-password" 
                   />
                 </Grid>
-              </Grid>  
-             
-              <Button 
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={ loading || currentUser } 
-                onClick={handleLogin}
-              >
-                Log in
-              </Button>
-              
+              </Grid>      
               <Button 
                 fullWidth
                 variant="contained"
@@ -141,20 +130,9 @@ function Copyright(props) {
               >
                 Sign Up
               </Button>  
-              
-              <Link href="/" variant="body2"> 
-              <Button 
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={ loading || !currentUser } 
-                onClick={handleLogout}
-              >
-                Log out
-              </Button></Link>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="../gameNews" variant="body2">
+                  <Link href="../login" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>
