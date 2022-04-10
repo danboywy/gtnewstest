@@ -132,7 +132,7 @@ export default function Menubar({ check, change }) {
              {/*-----------login----------*/}
           
              {!currentUser &&
-             <Link href="/authContext">
+             <Link href="/login">
             <div className={styles.notice}>
               <LoginIcon  sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
