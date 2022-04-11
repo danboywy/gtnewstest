@@ -105,7 +105,7 @@ function getList() {
   console.log(gameList);
   console.log(techList);
 
-  // localStorage.clear();
+  localStorage.clear();
 }
 
 function toggle(id) {
@@ -230,6 +230,7 @@ export default function TechSelectionPage() {
         <Button
           type="submit"
           variant="contained"
+          href="/gameNews"
           onClick={() => getList()}
           sx={{ mt: 3, mb: 2, ml: 1, mr: 2, float: "right" }}
         >
