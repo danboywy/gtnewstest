@@ -18,10 +18,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
 import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
-import {useAuth, logout} from '../stores/firebase'
+import {useAuth, logout, upload} from '../stores/firebase'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-
-
+import Profile from "../pages/Profile";
+import { useEffect, useState } from "react";
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
   async function handleLogout() {
@@ -36,6 +36,16 @@ export default function Menubar({ check, change }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  
+  
+  const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+  
   return (
     <div className={styles.meum_bar}>
       <Box sx={{ mx: "auto" }}>
@@ -121,9 +131,7 @@ export default function Menubar({ check, change }) {
             <div className={styles.account}>
               <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {" "}
-                <AccountCircleOutlinedIcon
-                  sx={{ color: "#2196f3", fontSize: 50 }}
-                />
+                <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>
               <br></br>
               <span className={styles.iconaccounttext}>Account</span>

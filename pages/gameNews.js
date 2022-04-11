@@ -108,7 +108,7 @@ export const getServerSideProps = async pageContext => {
 
       const keywords =  ["Halo"];
     const apiResponse = await fetch(
-        'https://newsapi.org/v2/everything?q=' + keywords.join(" OR ") + '&language=en&pageSize=20&page=${pageNumber}',
+        'https://newsapi.org/v2/everything?q=' + keywords.join(" OR ") + '&language=en&pageSize=5&page=${pageNumber}',
         {
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
