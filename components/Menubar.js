@@ -20,7 +20,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
 import {useAuth, logout, upload} from '../stores/firebase'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import Profile from "../pages/Profile";
+import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
@@ -45,8 +45,9 @@ export default function Menubar({ check, change }) {
       setPhotoURL(currentUser.photoURL);
     }
   }, [currentUser])
-  
+
   return (
+    <Container component="main" maxWidth="fixed">
     <div className={styles.meum_bar}>
       <Box sx={{ mx: "auto" }}>
         <Grid item xs={12} container>
@@ -184,6 +185,6 @@ export default function Menubar({ check, change }) {
         
    </Grid>
       </Box>
-    </div>
+    </div></Container>
   );
 }
