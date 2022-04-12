@@ -13,9 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Paper } from "@material-ui/core";
-const theme = createTheme();
+
 
 export default function accountSettings() {
+  const theme = createTheme();
   return (
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100vh" }}>
@@ -39,7 +40,7 @@ export default function accountSettings() {
             name="pic"
             fullWidth
             variant="contained"
-            href="Profile"
+            href="Profilepic"
             sx={{ mt: 3, mb: 2 }}
           >
             Profile Picture
@@ -66,6 +67,7 @@ export default function accountSettings() {
             name="likedGames"
             fullWidth
             variant="contained"
+            href="changeGames"
             sx={{ mt: 3, mb: 2 }}
           >
             Change Liked Games
@@ -74,6 +76,7 @@ export default function accountSettings() {
             name="likedTech"
             fullWidth
             variant="contained"
+            href="changeTech"
             sx={{ mt: 3, mb: 2 }}
           >
             Change Liked Tech

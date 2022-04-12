@@ -39,7 +39,7 @@ export default function Menubar({ check, change }) {
 
   
   
-  const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
+  const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/en/d/d0/Dogecoin_Logo.png");
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
@@ -130,7 +130,7 @@ export default function Menubar({ check, change }) {
             justifyContent="center"
           > {currentUser &&
             <div className={styles.account}>
-              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0,  marginTop:0.5, marginBottom:0.5 }}>
                 {" "}
                 <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>

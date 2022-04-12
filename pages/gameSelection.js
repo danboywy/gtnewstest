@@ -19,9 +19,6 @@ function toggle(id) {
   const num = parseInt(id, 10);
   const cat = id.replace(/[0-9]/g, "");
 
-  // console.log(num);
-  // console.log(cat);
-
   if (clickFlag[cat][num] === false) {
     clickFlag[cat][num] = true;
     document.getElementById(id).style.outlineColor = "#1c74ec";
@@ -32,12 +29,10 @@ function toggle(id) {
     document.getElementById(id).style.outlineWidth = "3px";
   }
 
-  // setCurrentSelection(clickFlag)
-
   // console.log(clickFlag);
 }
 
-function updateCurrentSelection(selectedGames) {
+function displayCurrentSelection(selectedGames) {
   for (var i = 0; i < categories.length; i++) {
     for (var j = 0; j < clickFlag["Shooter"].length; j++) {
       if (selectedGames[categories[i]][j] === true) {
@@ -155,7 +150,7 @@ export default function GameSelectionPage() {
     const data = window.localStorage.getItem("current_game_selection");
     if (data !== null) {
       setCurrentSelection(JSON.parse(data));
-      updateCurrentSelection(JSON.parse(data));
+      displayCurrentSelection(JSON.parse(data));
     }
   }, []);
 

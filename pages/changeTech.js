@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -23,90 +23,19 @@ const tech = {
 
 const categories = ["BigTech", "Hardware", "GameDevelopers"];
 
-function getList() {
-  var techList = [];
-  var gameList = [];
+function updateTech() {
+  var list = [];
 
   for (var i = 0; i < categories.length; i++) {
     for (var j = 0; j < tech["BigTech"].length; j++) {
       if (clickFlag[categories[i]][j] === true) {
-        techList.push(tech[categories[i]][j]);
-      }
-    }
-  }
-
-  const games = {
-    Shooter: [
-      "Counter-Strike: Global Offensive",
-      "Valorant",
-      "Apex Legends",
-      "Fortnite",
-      "Halo Infinite",
-      "Tom Clancy's Rainbow Six Siege",
-      "Overwatch",
-      "Destiny 2"
-    ],
-    MOBA: [
-      "League of Legends",
-      "Dota 2",
-      "Smite",
-      "Heroes of the Storm",
-      "Paladins",
-      "Arena of Valor",
-      "Battlerite",
-      "Vainglory"
-    ],
-    Sports: [
-      "FIFA 22",
-      "NBA 2K22",
-      "Riders Republic",
-      "Madden NFL 21",
-      "Rocket League",
-      "EA Sports UFC 4",
-      "MLB The Show 21",
-      "Tony Hawk's Pro Skater 1 + 2"
-    ],
-    RPG: [
-      "Elden Ring",
-      "Assassin's Creed Valhalla",
-      "Fallout 4",
-      "The Witcher 3: Wild Hunt",
-      "The Elder Scrolls V: Skyrim",
-      "The Legend of Zelda: Breath of the Wild",
-      "Dark Souls 3",
-      "Stardew Valley"
-    ],
-    Racing: [
-      "Forza Horizon 5",
-      "Need for Speed Heat",
-      "Dirt 5",
-      "TrackMania",
-      "iRacing",
-      "Gran Turismo 7",
-      "Project CARS",
-      "F1 2020"
-    ]
-  };
-  const gameCategories = ["Shooter", "MOBA", "Sports", "RPG", "Racing"];
-
-  const data = window.localStorage.getItem("current_game_selection");
-  if (data !== null) {
-    const selectedGames = JSON.parse(data);
-
-    for (i = 0; i < gameCategories.length; i++) {
-      for (j = 0; j < games["Shooter"].length; j++) {
-        if (selectedGames[gameCategories[i]][j] === true) {
-          gameList.push(games[gameCategories[i]][j]);
-        }
+        list.push(tech[categories[i]][j]);
       }
     }
   }
 
   // here is where we would update the database
-  console.log(gameList);
-  console.log(techList);
-
-  localStorage.clear();
+  console.log(list);
 }
 
 function toggle(id) {
@@ -126,11 +55,24 @@ function toggle(id) {
   }
 }
 
-function displayCurrentSelection(selectedTech) {
-  for (var i = 0; i < categories.length; i++) {
-    for (var j = 0; j < clickFlag["BigTech"].length; j++) {
-      if (selectedTech[categories[i]][j] === true) {
-        toggle(j + categories[i]);
+function displayCurrentSelection() {
+  // here is where we would pull from the database
+  var example = [
+    "Tesla",
+    "Amazon",
+    "Netflix",
+    "Intel",
+    "AMD",
+    "Valve",
+    "Epic Games"
+  ];
+
+  for (var i = 0; i < example.length; i++) {
+    for (var j = 0; j < categories.length; j++) {
+      for (var k = 0; k < tech["BigTech"].length; k++) {
+        if (example[i] === tech[categories[j]][k]) {
+          toggle(k + categories[j]);
+        }
       }
     }
   }
@@ -202,28 +144,10 @@ export default function TechSelectionPage() {
     "https://1000logos.net/wp-content/uploads/2020/06/Ubisoft-Logo.png"
   ];
 
-  const [currentSelection, setCurrentSelection] = useState({
-    BigTech: [false, false, false, false, false, false, false, false],
-    Hardware: [false, false, false, false, false, false, false, false],
-    GameDevelopers: [false, false, false, false, false, false, false, false]
-  });
-
   // called when page loads
   useEffect(() => {
-    const data = window.localStorage.getItem("current_tech_selection");
-    if (data !== null) {
-      setCurrentSelection(JSON.parse(data));
-      displayCurrentSelection(JSON.parse(data));
-    }
+    displayCurrentSelection();
   }, []);
-
-  // called when currentSelection is updated
-  useEffect(() => {
-    window.localStorage.setItem(
-      "current_tech_selection",
-      JSON.stringify(currentSelection)
-    );
-  }, [currentSelection]);
 
   return (
     <div>
@@ -231,20 +155,11 @@ export default function TechSelectionPage() {
         <Button
           type="submit"
           variant="contained"
-          href="/gameNews"
-          onClick={() => getList()}
+          href="/accountSettings"
+          onClick={() => updateTech()}
           sx={{ mt: 3, mb: 2, ml: 1, mr: 2, float: "right" }}
         >
-          Done
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          href="/gameSelection"
-          onClick={() => setCurrentSelection(clickFlag)}
-          sx={{ mt: 3, mb: 2, float: "right" }}
-        >
-          Back
+          Update
         </Button>
       </div>
 
