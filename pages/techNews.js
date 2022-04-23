@@ -30,7 +30,7 @@ import {
 
 
   
-export const techNews = ({ articles, pageNumber }) => {
+export const Feed = ({ articles, pageNumber }) => {
    const router = useRouter();
     //const gameNames = ["Halo", "LeagueOfLegends", "CallofDuty"];
     //for (let index = 0; index < gameNames.length; index++) {
@@ -130,4 +130,4 @@ export const getServerSideProps = async pageContext => {
 
 
 
-export default techNews;
+export default Feed;

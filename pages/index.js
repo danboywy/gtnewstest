@@ -11,7 +11,7 @@ import {useAuth} from '../stores/firebase'
 import NewsCard from "../components/newsarticle";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
-import { NavLink, BrowserRouter } from "react-router-dom";
+
 const theme = createTheme();
 
 export default function Home() {
