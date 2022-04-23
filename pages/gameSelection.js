@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import * as React from "react";
+// import GameRow from "../components/selectionRow"
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+// import TextField from "@mui/material/TextField";
 
 var clickFlag = {
   Shooter: [false, false, false, false, false, false, false, false],
@@ -11,18 +13,19 @@ var clickFlag = {
   Racing: [false, false, false, false, false, false, false, false]
 };
 
-const categories = ["Shooter", "MOBA", "Sports", "RPG", "Racing"];
-
 function toggle(id) {
-  // console.log("toggling " + id);
+  // console.log("clicked " + id);
 
   const num = parseInt(id, 10);
   const cat = id.replace(/[0-9]/g, "");
 
+  // console.log(num);
+  // console.log(cat);
+
   if (clickFlag[cat][num] === false) {
     clickFlag[cat][num] = true;
     document.getElementById(id).style.outlineColor = "#1c74ec";
-    document.getElementById(id).style.outlineWidth = "7px";
+    document.getElementById(id).style.outlineWidth = "6px";
   } else {
     clickFlag[cat][num] = false;
     document.getElementById(id).style.outlineColor = "black";
@@ -30,16 +33,6 @@ function toggle(id) {
   }
 
   // console.log(clickFlag);
-}
-
-function displayCurrentSelection(selectedGames) {
-  for (var i = 0; i < categories.length; i++) {
-    for (var j = 0; j < clickFlag["Shooter"].length; j++) {
-      if (selectedGames[categories[i]][j] === true) {
-        toggle(j + categories[i]);
-      }
-    }
-  }
 }
 
 const Game = ({ images, index, id }) => {
@@ -67,9 +60,12 @@ const Game = ({ images, index, id }) => {
 };
 
 const GameRow = ({ images, text }) => {
+  // const spacing = React.useState(4);
+
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={2}>
       <Grid item xs={12}>
+        {/*<h1 style={{marginLeft:240}}>{text}</h1>*/}
         <h1 style={{ textAlign: "center" }}>{text}</h1>
         <Grid container justifyContent="center" spacing={4}>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((value) => (
@@ -81,7 +77,7 @@ const GameRow = ({ images, text }) => {
   );
 };
 
-export default function GameSelectionPage() {
+export default function gameSelectionPage() {
   const shooters = [
     "https://images.mein-mmo.de/medien/2020/02/CSGO-Packshot.jpg",
     "https://static-cdn.jtvnw.net/ttv-boxart/516575-150x200.jpg",
@@ -137,43 +133,43 @@ export default function GameSelectionPage() {
     "https://upload.wikimedia.org/wikipedia/en/8/84/F1_2020_Cover.jpg"
   ];
 
-  const [currentSelection, setCurrentSelection] = useState({
-    Shooter: [false, false, false, false, false, false, false, false],
-    MOBA: [false, false, false, false, false, false, false, false],
-    Sports: [false, false, false, false, false, false, false, false],
-    RPG: [false, false, false, false, false, false, false, false],
-    Racing: [false, false, false, false, false, false, false, false]
-  });
-
-  // called when page loads
-  useEffect(() => {
-    const data = window.localStorage.getItem("current_game_selection");
-    if (data !== null) {
-      setCurrentSelection(JSON.parse(data));
-      displayCurrentSelection(JSON.parse(data));
-    }
-  }, []);
-
-  // called when currentSelection is updated
-  useEffect(() => {
-    window.localStorage.setItem(
-      "current_game_selection",
-      JSON.stringify(currentSelection)
-    );
-  }, [currentSelection]);
-
   return (
     <div>
       <div>
+        {/*<div style={{ margin: "1em 0 0 1em" }}>
+          <img
+            src="GTNEWS.png"
+            alt="GTNews"
+            width="110"
+            height="100"
+            style={{ float: "left" }}
+          ></img>
+        </div>*/}
+
+        {/*<div>
+          <TextField
+            variant="outlined"
+            label="Search"
+            style={{ float: "left" }}
+          />
+        </div>*/}
+
         <Button
           type="submit"
           variant="contained"
           href="/techSelection"
-          onClick={() => setCurrentSelection(clickFlag)}
           sx={{ mt: 3, mb: 2, ml: 1, mr: 2, float: "right" }}
         >
           Next
         </Button>
+        {/*<Button
+          type="submit"
+          variant="contained"
+          href="/index"
+          sx={{ mt: 3, mb: 2, float: "right" }}
+        >
+          Back
+        </Button>*/}
       </div>
 
       <div>

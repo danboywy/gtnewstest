@@ -3,29 +3,21 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useRef } from "react";
-import { getDatabase, ref, get, child, set, onValue } from "firebase/database"
-import { getAuth, updateEmail } from "firebase/auth";
+
 const theme = createTheme();
 
-export default function ChangeEmail() {
-  var oldEmail = "";
-  var newEmail = "";
-  const auth = getAuth();
+export default function changeEmail() {
   const handleSubmit = (event) => {
-    console.log("test123\n")
-    console.log("Email before:", auth.currentUser.email, '\n')
-    updateEmail(auth.currentUser, newEmail).then(() => {
-      //Updated
-      console.log("New email: ", user, '\n')
-    }).catch((error) => {
-      console.log("error\n")
-    })
+    console.log("test1234");
   };
 
   return (
@@ -33,7 +25,7 @@ export default function ChangeEmail() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
-          onSubmit={handleSubmit()}
+          onSubmit={handleSubmit}
           sx={{
             marginTop: 8,
             display: "flex",
@@ -55,7 +47,6 @@ export default function ChangeEmail() {
             label="Old Email"
             type="old-email"
             autoComplete="old-email"
-            value={oldEmail}
           />
           <TextField
             margin="normal"
@@ -65,7 +56,6 @@ export default function ChangeEmail() {
             label="New Email"
             type="new-email"
             autoComplete="new-email"
-            value={newEmail}
           />
           <Button
             type="submit"

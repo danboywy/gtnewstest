@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import ShareIcon from '@mui/icons-material/Share';
-import Box from "@material-ui/core/Box";
+import Box from '@mui/material/Box';
 import { ThumbUp } from "@mui/icons-material";
 import { Container } from "@mui/material";
 //import { Link } from 'react-router-dom';

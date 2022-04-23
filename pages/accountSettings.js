@@ -12,19 +12,17 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Paper } from "@material-ui/core";
 
+const theme = createTheme();
 
 export default function accountSettings() {
-  const theme = createTheme();
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "100vh" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
+            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center"
@@ -36,15 +34,6 @@ export default function accountSettings() {
           <Typography component="h1" variant="h5">
             Account Settings
           </Typography>
-          <Button
-            name="pic"
-            fullWidth
-            variant="contained"
-            href="Profilepic"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Profile Picture
-          </Button>
           <Button
             name="password"
             fullWidth
@@ -67,7 +56,6 @@ export default function accountSettings() {
             name="likedGames"
             fullWidth
             variant="contained"
-            href="changeGames"
             sx={{ mt: 3, mb: 2 }}
           >
             Change Liked Games
@@ -76,7 +64,6 @@ export default function accountSettings() {
             name="likedTech"
             fullWidth
             variant="contained"
-            href="changeTech"
             sx={{ mt: 3, mb: 2 }}
           >
             Change Liked Tech
@@ -90,10 +77,8 @@ export default function accountSettings() {
           >
             Return
           </Button>
-          
         </Box>
       </Container>
-      </Paper>
     </ThemeProvider>
   );
 }
