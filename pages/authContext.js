@@ -16,7 +16,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRef, } from "react";
 import { signup, login, logout, useAuth } from "../stores/firebase";
-
+import { useRouter } from 'next/router'
+import { Paper } from "@material-ui/core";
 
 function Copyright(props) {
     return (
@@ -34,7 +35,7 @@ function Copyright(props) {
   const theme = createTheme();
   
   export default function SignUp() {
-    
+    const router = useRouter()
     
     const [ loading, setLoading ] = useState(false);
   const currentUser = useAuth();
@@ -46,6 +47,7 @@ function Copyright(props) {
     setLoading(true);
      try {
       await signup(emailRef.current.value, passwordRef.current.value);
+      router.push('../gameSelection')
      } catch {
        alert("Error!");
     }
@@ -56,11 +58,13 @@ function Copyright(props) {
     setLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
+      router.push('/')
     } catch {
       alert("Error!");
     }
     setLoading(false);
-  }
+}
+    
 
   async function handleLogout() {
     setLoading(true);
@@ -75,6 +79,7 @@ function Copyright(props) {
   
     return (
       <ThemeProvider theme={theme}>
+         <Paper style={{ height: "100vh" }}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -117,18 +122,7 @@ function Copyright(props) {
                     autoComplete="new-password" 
                   />
                 </Grid>
-              </Grid>  
-              
-              <Button 
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={ loading || currentUser } 
-                onClick={handleLogin}
-              >
-                Log in
-              </Button>
-              
+              </Grid>      
               <Button 
                 fullWidth
                 variant="contained"
@@ -138,20 +132,9 @@ function Copyright(props) {
               >
                 Sign Up
               </Button>  
-              
-              <Link href="/" variant="body2"> 
-              <Button 
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                disabled={ loading || !currentUser } 
-                onClick={handleLogout}
-              >
-                Log out
-              </Button></Link>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="../gameNews" variant="body2">
+                  <Link href="../login" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>
@@ -159,7 +142,7 @@ function Copyright(props) {
             </Box>
           </Box>
           <Copyright sx={{ mt: 5 }} />
-        </Container>
+        </Container></Paper>
       </ThemeProvider>
     );
   }

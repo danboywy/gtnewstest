@@ -18,10 +18,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Switch from "@mui/material/Switch";
 import LoginIcon from '@mui/icons-material/Login';
 import {useContext} from 'react'
-import {useAuth, logout} from '../stores/firebase'
+import {useAuth, logout, upload} from '../stores/firebase'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-
-
+import Container from "@mui/material/Container";
+import { useEffect, useState } from "react";
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
   async function handleLogout() {
@@ -36,7 +36,18 @@ export default function Menubar({ check, change }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  
+  
+  const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser])
+
   return (
+    <Container component="main" maxWidth="fixed">
     <div className={styles.meum_bar}>
       <Box sx={{ mx: "auto" }}>
         <Grid item xs={12} container>
@@ -121,9 +132,7 @@ export default function Menubar({ check, change }) {
             <div className={styles.account}>
               <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {" "}
-                <AccountCircleOutlinedIcon
-                  sx={{ color: "#2196f3", fontSize: 50 }}
-                />
+                <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>
               <br></br>
               <span className={styles.iconaccounttext}>Account</span>
@@ -132,7 +141,7 @@ export default function Menubar({ check, change }) {
              {/*-----------login----------*/}
           
              {!currentUser &&
-             <Link href="/authContext">
+             <Link href="/login">
             <div className={styles.notice}>
               <LoginIcon  sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
@@ -176,6 +185,6 @@ export default function Menubar({ check, change }) {
         
    </Grid>
       </Box>
-    </div>
+    </div></Container>
   );
 }

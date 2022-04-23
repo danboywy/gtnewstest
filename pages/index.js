@@ -44,7 +44,7 @@ export default function Home() {
               </Typography>
               {!currentUser && (
                 <Container maxWidth="xs">
-                  <Link href="/authContext">
+                  <Link href="/login">
                   <Button
                     name="LogIn"
                     fullWidth
