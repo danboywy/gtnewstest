@@ -5,7 +5,7 @@ import { Paper } from "@material-ui/core";
 import Menubar from "../components/Menubar";
 import {AuthContextProvider} from './authContext';
 import { NavLink, BrowserRouter,Switch, Route } from "react-router-dom";
-import { techNews } from '../pages/techNews';
+
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
