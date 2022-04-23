@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Paper } from "@material-ui/core";
 import Menubar from "../components/Menubar";
-import {AuthContextProvider} from './authContext'
+import {AuthContextProvider} from './authContext';
+import { NavLink, BrowserRouter,Switch, Route } from "react-router-dom";
+import { techNews } from '../pages/techNews';
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -22,11 +24,12 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
+   
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100%" }}>
 
         <Menubar check={darkMode} change={() => setDarkMode(!darkMode)} />
-
+     
         <Component {...pageProps} />
       </Paper>
     </ThemeProvider>

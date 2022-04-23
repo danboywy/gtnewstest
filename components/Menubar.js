@@ -22,10 +22,21 @@ import {useAuth, logout, upload} from '../stores/firebase'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
+import ActiveLink from "./ActiveLink";
+import { useRouter } from 'next/router'
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
+  const router = useRouter()
+  const [ loading, setLoading ] = useState(false);
   async function handleLogout() {
+    setLoading(true);
+    try {
       await logout();
+      router.push('/');
+    } catch {
+      alert("Error!");
+    }
+    setLoading(false);
   }
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -46,6 +57,11 @@ export default function Menubar({ check, change }) {
     }
   }, [currentUser])
 
+
+  async function  wrapperFunction() {
+    setAnchorElUser(null);
+    handleLogout();
+}
   return (
     <Container component="main" maxWidth="fixed">
     <div className={styles.meum_bar}>
@@ -70,67 +86,39 @@ export default function Menubar({ check, change }) {
             <Switch checked={check} onChange={change} />
             <span className={styles.switchtext}>Dark mode</span>
           </Grid>
-         
-          <Grid
-            item
-            xs={1}
-            container
-            alignItems="center"
-            justifyContent="center"
-            
-          > {currentUser &&
-            <div className={styles.tech} >
-              <Link href="/techNews">
-                <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
-              </Link>
+          {currentUser &&
+            <ActiveLink href="/techNews">
+              <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
-              <Link href="/techNews">
-                <span className={styles.icontechtext}>Tech</span>
-              </Link>
-            </div>}
-          </Grid>
-          <Grid
-            item
-            xs={1}
-            container
-            alignItems="center"
-            justifyContent="center"
-          > {currentUser &&
-            <div className={styles.game}>
-              <Link href="/gameNews">
+              <span className={styles.icontechtext}>Tech</span>
+            </ActiveLink>
+          }
+          {currentUser &&
+            <ActiveLink href="/gameNews">
                 <SportsEsportsOutlinedIcon
                   sx={{ color: "#2196f3", fontSize: 50 }}
-                />
-              </Link>
-              <br></br>
-              <Link href="/gameNews">
+                />          
+              <br></br>      
                 <span className={styles.icongametext}>Game</span>
-              </Link>
-            </div>}
-          </Grid>
-         
-          <Grid
-            item
-            xs={1}
-            container
-            alignItems="center"
-            justifyContent="center"
-          > {currentUser &&
-            <div className={styles.favorite}>
+            </ActiveLink>
+          }      
+          {currentUser &&
+            <ActiveLink href="/favorite">
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
               <span className={styles.iconaccounttext}>Favorites</span>
-            </div>}
-          </Grid>
+              </ActiveLink>
+          }
+          {!currentUser &&<Grid item xs={3} container></Grid>}
           <Grid
             item
             xs={1}
             container
             alignItems="center"
             justifyContent="center"
-          > {currentUser &&
-            <div className={styles.account}>
-              <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0,  marginTop:0.5, marginBottom:0.5 }}>
+            > {currentUser &&
+            <div className={styles.account} >
+              <IconButton  onClick={handleOpenUserMenu}  sx={{ p: 0,  marginTop:0.5, marginBottom:0.5 }}>
                 {" "}
                 <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>
@@ -162,23 +150,21 @@ export default function Menubar({ check, change }) {
                 horizontal: "right"
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
+              onClose={handleCloseUserMenu}
+             >
                 <Link href="/accountSettings">
-            <MenuItem>
-              <ListItemIcon>
-                
+            <MenuItem onClick={handleCloseUserMenu}>
+              <ListItemIcon>        
                 <ManageAccountsIcon fontSize="small" />
-              
               </ListItemIcon>
               Setting
             </MenuItem></Link>
-            <Link href="/" variant="body2"> 
-            <MenuItem onClick={handleLogout}>
+            <MenuItem onClick={wrapperFunction}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
               Logout
-            </MenuItem></Link>
+            </MenuItem>
         
             </Menu>
           </Grid>

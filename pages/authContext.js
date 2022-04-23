@@ -70,6 +70,8 @@ function Copyright(props) {
     setLoading(true);
     try {
       await logout();
+      router.push('/');
+      router.reload();
     } catch {
       alert("Error!");
     }
