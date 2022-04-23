@@ -102,6 +102,7 @@ function getList() {
     }
   }
 
+  // here is where we would update the database
   console.log(gameList);
   console.log(techList);
 
@@ -125,7 +126,7 @@ function toggle(id) {
   }
 }
 
-function updateCurrentSelection(selectedTech) {
+function displayCurrentSelection(selectedTech) {
   for (var i = 0; i < categories.length; i++) {
     for (var j = 0; j < clickFlag["BigTech"].length; j++) {
       if (selectedTech[categories[i]][j] === true) {
@@ -212,7 +213,7 @@ export default function TechSelectionPage() {
     const data = window.localStorage.getItem("current_tech_selection");
     if (data !== null) {
       setCurrentSelection(JSON.parse(data));
-      updateCurrentSelection(JSON.parse(data));
+      displayCurrentSelection(JSON.parse(data));
     }
   }, []);
 

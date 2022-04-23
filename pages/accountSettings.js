@@ -39,7 +39,7 @@ export default function accountSettings() {
             name="pic"
             fullWidth
             variant="contained"
-            href="Profile"
+            href="Profilepic"
             sx={{ mt: 3, mb: 2 }}
           >
             Profile Picture
