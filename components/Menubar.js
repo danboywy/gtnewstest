@@ -85,14 +85,7 @@ export default function Menubar({ check, change }) {
           <Grid item xs={1} container alignItems="center">
             <Switch checked={check} onChange={change} />
             <span className={styles.switchtext}>Dark mode</span>
-          </Grid>
-          {currentUser &&
-            <ActiveLink href="/techNews">
-              <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
-              <br></br>
-              <span className={styles.icontechtext}>Tech</span>
-            </ActiveLink>
-          }
+          </Grid>        
           {currentUser &&
             <ActiveLink href="/gameNews">
                 <SportsEsportsOutlinedIcon
@@ -101,7 +94,14 @@ export default function Menubar({ check, change }) {
               <br></br>      
                 <span className={styles.icongametext}>Game</span>
             </ActiveLink>
-          }      
+          }  
+          {currentUser &&
+            <ActiveLink href="/techNews">
+              <PublicOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
+              <br></br>
+              <span className={styles.icontechtext}>Tech</span>
+            </ActiveLink>
+          }    
           {currentUser &&
             <ActiveLink href="/favorite">
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
