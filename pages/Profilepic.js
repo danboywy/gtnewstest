@@ -20,6 +20,7 @@ export default function Profile() {
 
   function handleClick() {
     upload(photo, currentUser, setLoading);
+    document.getElementById("retbutton").innerHTML = "Done";
   }
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function Profile() {
       fullWidth
       variant="contained"
       href="accountSettings"
+      id="retbutton"
       sx={{ mt: 3, mb: 2 }}
     >
       Return

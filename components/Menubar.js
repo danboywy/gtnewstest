@@ -24,6 +24,7 @@ import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 import ActiveLink from "./ActiveLink";
 import { useRouter } from 'next/router'
+import { setRetVal } from "../pages/accountSettings";
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
   const router = useRouter()
@@ -46,6 +47,7 @@ export default function Menubar({ check, change }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    setRetVal(window.location.pathname);
   };
 
   
@@ -79,7 +81,7 @@ export default function Menubar({ check, change }) {
               </div>
             </Link>
           </Grid>
-          <Grid item md={3.5} lg={4.5} container alignItems="center">
+          <Grid item md={3} lg={4} container alignItems="center">
             <Datetime />
           </Grid>
           <Grid item xs={1} container alignItems="center">
@@ -112,7 +114,7 @@ export default function Menubar({ check, change }) {
           {!currentUser &&<Grid item xs={3} container></Grid>}
           <Grid
             item
-            xs={1}
+            xs={1.5}
             container
             alignItems="center"
             justifyContent="center"
@@ -123,7 +125,7 @@ export default function Menubar({ check, change }) {
                 <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>
               <br></br>
-              <span className={styles.iconaccounttext}>Account</span>
+              <span className={styles.iconaccounttext}>{currentUser.email}</span>
             </div>}
 
              {/*-----------login----------*/}

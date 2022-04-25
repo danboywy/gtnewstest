@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRef, } from "react";
-import { signup, login, logout, useAuth } from "../stores/firebase";
+import { signup, login, logout, useAuth,forgotPassword } from "../stores/firebase";
 import { useRouter } from 'next/router'
 import { createContext,useEffect, useState } from "react"
 import { Paper } from "@material-ui/core";
@@ -39,16 +39,6 @@ export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  async function handleSignup() {
-    setLoading(true);
-     try {
-      await signup(emailRef.current.value, passwordRef.current.value);
-      router.push('../gameSelection')
-     } catch {
-       alert("Error!");
-    }
-    setLoading(false);
-  }
 
   async function handleLogin() {
     setLoading(true);
@@ -71,6 +61,11 @@ export default function SignIn() {
     }
     setLoading(false);
   }
+
+  const forgotPasswordHandler =() => {
+    const email = emailRef.current.value;
+    if(email) forgotPassword(email).then(()=> emailRef.current.value ='')
+  }
   return (
     <ThemeProvider theme={theme}>
         <Paper style={{ height: "100vh" }}>
@@ -88,7 +83,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot Password
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
@@ -102,17 +97,6 @@ export default function SignIn() {
               autoFocus
               inputRef={emailRef}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              inputRef={passwordRef}
-            />
             <Button            
               fullWidth
               variant="contained"
@@ -120,22 +104,20 @@ export default function SignIn() {
               disabled={ loading || currentUser } 
                 onClick={handleLogin}
             >
-              Sign In
+              send Password Reset Email
             </Button>
             <Link href="/" variant="body2"> 
               <Button 
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                disabled={ loading || !currentUser } 
-                onClick={handleLogout}
               >
-                Log out
+                Return
               </Button></Link>
             <Grid container>
               <Grid item xs>
-                <Link href="../resetpassword" variant="body2">
-                  Forgot password?
+                <Link href="../login" variant="body2">
+                  Sign in?
                 </Link>
               </Grid>
               <Grid item>

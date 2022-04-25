@@ -1,7 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile} from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile,
+  updateEmail,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail
+} from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,26 +48,86 @@ export function logout() {
 
 // Custom Hook
 export function useAuth() {
-  const [ currentUser, setCurrentUser ] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+    const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
     return unsub;
-  }, [])
+  }, []);
 
   return currentUser;
 }
 
 export async function upload(file, currentUser, setLoading) {
-  const fileRef = ref(storage, currentUser.uid + '.png');
+  const fileRef = ref(storage, currentUser.uid + ".png");
 
   setLoading(true);
-  
+
   const snapshot = await uploadBytes(fileRef, file);
   const photoURL = await getDownloadURL(fileRef);
 
-  updateProfile(currentUser, {photoURL});
-  
+  updateProfile(currentUser, { photoURL });
+
   setLoading(false);
   alert("Uploaded file!");
+}
+export function forgotPassword (email){
+   return sendPasswordResetEmail(auth,email);
+ }
+
+export async function changeEmail(currentUser, newEmail, pass) {
+  //console.log("Email before: ", currentUser.email, "\n")
+  const credential = EmailAuthProvider.credential(currentUser.email, pass);
+  try {
+    const result = await reauthenticateWithCredential(currentUser, credential);
+    console.log("result: ", result);
+    updateEmail(currentUser, newEmail)
+      .then(() => {
+        //Updated
+        console.log("New email: ", currentUser.email, "\n");
+      })
+      .catch((error) => {
+        console.log("error\n");
+      });
+  } catch (error) {
+    console.log("Error: ", error.message);
+    if (error.message == "Firebase: Error (auth/wrong-password).") {
+      pass = prompt("Invalid password");
+      changeEmail(currentUser, newEmail, pass);
+    } else if (error.message == "Firebase: Error (auth/internal-error).") {
+      console.log("cancelled out");
+      return;
+    }
+  }
+}
+
+export async function changePass(currentUser, newPass, oldPass) {
+  //console.log("Email before: ", currentUser.email, "\n")
+  const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+  var success = false;
+  try {
+    const result = await reauthenticateWithCredential(currentUser, credential);
+    console.log("result: ", result);
+    await updatePassword(currentUser, newPass)
+      .then(() => {
+        //Updated
+        console.log("New password: ", currentUser.password, "\n");
+        success = true;
+        console.log("Success in firebase: ", success);
+      })
+      .catch((error) => {
+        console.log("error updating password\n");
+      });
+  } catch (error) {
+    console.log("Error: ", error.message);
+    if (error.message == "Firebase: Error (auth/wrong-password).") {
+      console.log("wrong password");
+      var pass = prompt("Invalid Password. Please try again.");
+      changePass(currentUser, newPass, pass);
+    } else if (error.message == "Firebase: Error (auth/internal-error).") {
+      console.log("cancelled out");
+    }
+  } finally {
+    return success;
+  }
 }
