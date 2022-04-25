@@ -15,6 +15,7 @@ import { signup, login, logout, useAuth,forgotPassword } from "../stores/firebas
 import { useRouter } from 'next/router'
 import { createContext,useEffect, useState } from "react"
 import { Paper } from "@material-ui/core";
+import Alert from '@mui/material/Alert';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -32,39 +33,22 @@ const theme = createTheme();
 
 export default function SignIn() {
     const router = useRouter()
-    
+    const [error, setError] = useState('')
     const [ loading, setLoading ] = useState(false);
   const currentUser = useAuth();
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
-
-  async function handleLogin() {
+async function forgotPasswordHandler() {
     setLoading(true);
     try {
-      await login(emailRef.current.value, passwordRef.current.value);
-      router.push('/')
-    } catch {
-      alert("Error!");
-    }
-    setLoading(false);
-}
-    
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      await logout();
-    } catch {
-      alert("Error!");
-    }
-    setLoading(false);
-  }
-
-  const forgotPasswordHandler =() => {
-    const email = emailRef.current.value;
-    if(email) forgotPassword(email).then(()=> emailRef.current.value ='')
+    await forgotPassword(emailRef.current.value)
+    document.getElementById("alert").innerHTML = "A password reset link was sent. Click the link in the email.";
+    document.getElementById("retbutton").innerHTML = "Done";
+  } catch (err) {
+    setError(err.message)
+  }setLoading(false);
   }
   return (
     <ThemeProvider theme={theme}>
@@ -85,6 +69,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Forgot Password
           </Typography>
+          {error && <Alert id='alert' severity="error">{error}</Alert>}
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -101,8 +86,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              disabled={ loading || currentUser } 
-                onClick={handleLogin}
+                onClick={forgotPasswordHandler}
             >
               send Password Reset Email
             </Button>
@@ -111,6 +95,7 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                id='retbutton'
               >
                 Return
               </Button></Link>

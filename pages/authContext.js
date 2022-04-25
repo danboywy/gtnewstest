@@ -18,6 +18,7 @@ import { useRef, } from "react";
 import { signup, login, logout, useAuth } from "../stores/firebase";
 import { useRouter } from 'next/router'
 import { Paper } from "@material-ui/core";
+import Alert from '@mui/material/Alert';
 
 function Copyright(props) {
     return (
@@ -36,7 +37,7 @@ function Copyright(props) {
   
   export default function SignUp() {
     const router = useRouter()
-    
+    const [error, setError] = useState('')
     const [ loading, setLoading ] = useState(false);
   const currentUser = useAuth();
 
@@ -48,35 +49,12 @@ function Copyright(props) {
      try {
       await signup(emailRef.current.value, passwordRef.current.value);
       router.push('../gameSelection')
-     } catch {
-       alert("Error!");
+     } catch (err) {
+       setError(err.message)
     }
     setLoading(false);
   }
-
-  async function handleLogin() {
-    setLoading(true);
-    try {
-      await login(emailRef.current.value, passwordRef.current.value);
-      router.push('/')
-    } catch {
-      alert("Error!");
-    }
-    setLoading(false);
-}
-    
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      await logout();
-    } catch {
-      alert("Error!");
-    }
-    setLoading(false);
-  }
-
-  
+      
     return (
       <ThemeProvider theme={theme}>
          <Paper style={{ height: "100vh" }}>
@@ -96,6 +74,7 @@ function Copyright(props) {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
+            {error && <Alert severity="error">{error}</Alert>}
             <Box component="form" noValidate  sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>

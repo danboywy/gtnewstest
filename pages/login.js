@@ -15,6 +15,7 @@ import { signup, login, logout, useAuth } from "../stores/firebase";
 import { useRouter } from 'next/router'
 import { createContext,useEffect, useState } from "react"
 import { Paper } from "@material-ui/core";
+import Alert from '@mui/material/Alert';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -35,28 +36,17 @@ export default function SignIn() {
     
     const [ loading, setLoading ] = useState(false);
   const currentUser = useAuth();
-
+  const [error, setError] = useState('')
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  async function handleSignup() {
-    setLoading(true);
-     try {
-      await signup(emailRef.current.value, passwordRef.current.value);
-      router.push('../gameSelection')
-     } catch {
-       alert("Error!");
-    }
-    setLoading(false);
-  }
 
   async function handleLogin() {
     setLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
       router.push('/')
-    } catch {
-      alert("Error!");
+    } catch (err) {
+      setError(err.message)
     }
     setLoading(false);
 }
@@ -66,8 +56,8 @@ export default function SignIn() {
     setLoading(true);
     try {
       await logout();
-    } catch {
-      alert("Error!");
+    } catch (err) {
+      setError(err.message)
     }
     setLoading(false);
   }
@@ -90,6 +80,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {error && <Alert severity="error">{error}</Alert>}
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"

@@ -78,13 +78,16 @@ export function forgotPassword (email){
 export async function changeEmail(currentUser, newEmail, pass) {
   //console.log("Email before: ", currentUser.email, "\n")
   const credential = EmailAuthProvider.credential(currentUser.email, pass);
+  var test = false;
   try {
     const result = await reauthenticateWithCredential(currentUser, credential);
     console.log("result: ", result);
-    updateEmail(currentUser, newEmail)
+    await updateEmail(currentUser, newEmail)
       .then(() => {
         //Updated
         console.log("New email: ", currentUser.email, "\n");
+        test = true;
+        console.log("test in firebase: ", test);
       })
       .catch((error) => {
         console.log("error\n");
@@ -96,8 +99,9 @@ export async function changeEmail(currentUser, newEmail, pass) {
       changeEmail(currentUser, newEmail, pass);
     } else if (error.message == "Firebase: Error (auth/internal-error).") {
       console.log("cancelled out");
-      return;
     }
+  } finally {
+    return test;
   }
 }
 
