@@ -108,7 +108,7 @@ export default function Menubar({ check, change }) {
             <ActiveLink href="/favorite">
               <StarOutlinedIcon sx={{ color: "#2196f3", fontSize: 50 }} />
               <br></br>
-              <span className={styles.iconaccounttext}>Favorite</span>
+              <span className={styles.iconaccounttext}>Donate</span>
               </ActiveLink>
           }
           {!currentUser &&<Grid item xs={3} container></Grid>}

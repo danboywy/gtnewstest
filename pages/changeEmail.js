@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth, changeEmail } from "../stores/firebase";
 import { setRetVal } from "../pages/accountSettings";
-
+import { Paper } from "@material-ui/core";
 const theme = createTheme();
 var eRetVal = "";
 
@@ -41,6 +41,7 @@ export default function ChangeEmail() {
 
   return (
     <ThemeProvider theme={theme}>
+        <Paper style={{ height: "100vh" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -89,6 +90,7 @@ export default function ChangeEmail() {
           </Button>
         </Box>
       </Container>
+      </Paper>
     </ThemeProvider>
   );
 }

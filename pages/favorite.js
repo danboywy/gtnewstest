@@ -14,7 +14,8 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Paper } from "@material-ui/core";
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -27,75 +28,44 @@ function Copyright(props) {
     </Typography>
   );
 }
-
+const theme = createTheme();
 const tiers = [
   {
-    title: 'Free',
-    price: '0',
+    title: '1 million',
+    price: '1million',
     description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
+      'Donate 1 million per month',
     ],
-    buttonText: 'Sign up for free',
+    buttonText: 'Donate',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Pro',
+    title: '1 Billion',
     subheader: 'Most popular',
-    price: '15',
+    price: '1billion',
     description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
+      'Donate 1 Billion per month',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Donate',
     buttonVariant: 'contained',
   },
   {
-    title: 'Enterprise',
-    price: '30',
+    title: '1 Thousand',
+    price: '1000',
     description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
+      'Donate 1 million per month',
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Donate',
     buttonVariant: 'outlined',
   },
 ];
 
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: [
-      'Cool stuff',
-      'Random feature',
-      'Team feature',
-      'Developer stuff',
-      'Another one',
-    ],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
 
 function PricingContent() {
   return (
     <React.Fragment>
+      <ThemeProvider theme={theme}>
+        <Paper style={{ height: "100vh" }}>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <AppBar
@@ -116,12 +86,10 @@ function PricingContent() {
           color="text.primary"
           gutterBottom
         >
-          Pricing
+          Donation
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. It&apos;s built with default MUI components with little
-          customization.
+        Would you please consider making a donation to help GTNews?
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -133,7 +101,7 @@ function PricingContent() {
               item
               key={tier.title}
               xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
+              sm={tier.title === '1 Thousand' ? 12 : 6}
               md={4}
             >
               <Card>
@@ -141,7 +109,7 @@ function PricingContent() {
                   title={tier.title}
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  action={tier.title === '1 Billion' ? <StarIcon /> : null}
                   subheaderTypographyProps={{
                     align: 'center',
                   }}
@@ -191,37 +159,10 @@ function PricingContent() {
           ))}
         </Grid>
       </Container>
-      {/* Footer */}
-      <Container
-        maxWidth="md"
-        component="footer"
-        sx={{
-          borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-          mt: 8,
-          py: [3, 6],
-        }}
-      >
-        <Grid container spacing={4} justifyContent="space-evenly">
-          {footers.map((footer) => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="text.secondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
       {/* End footer */}
+      </Paper>
+      </ThemeProvider>
+      
     </React.Fragment>
   );
 }

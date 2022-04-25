@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth, changePass } from "../stores/firebase";
-
+import { Paper } from "@material-ui/core";
 
 const theme = createTheme();
 var pRetVal = "";
@@ -42,6 +42,7 @@ export default function ChangePass() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Paper style={{ height: "100vh" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -95,13 +96,13 @@ export default function ChangePass() {
             variant="contained"
             href="accountSettings"
             sx={{ mt: 3, mb: 2 }}
-            id="retbutton"
-            
+            id="retbutton"  
           >
             Return
           </Button>
         </Box>
       </Container>
+      </Paper>
     </ThemeProvider>
   );
 }
