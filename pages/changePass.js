@@ -58,7 +58,7 @@ export default function ChangePass() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Account Settings
+            Change Password
           </Typography>
           <TextField
             margin="normal"

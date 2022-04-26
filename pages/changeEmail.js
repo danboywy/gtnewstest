@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth, changeEmail } from "../stores/firebase";
 import { setRetVal } from "../pages/accountSettings";
+import { useRouter } from 'next/router'
 import { Paper } from "@material-ui/core";
 const theme = createTheme();
 var eRetVal = "";
@@ -20,6 +21,7 @@ export function emailRetVal(url) {
 }
 
 export default function ChangeEmail() {
+  const router = useRouter();
   var newEmail = "";
   const auth = useAuth();
   const newEmailUpdate = (e) => {
@@ -34,8 +36,10 @@ export default function ChangeEmail() {
     var result = await changeEmail(auth, newEmail, pass);
     console.log("after change email: ", result);
     if (result) {
+      router.reload()
       document.getElementById("retbutton").innerHTML = "Done";
       console.log("after email change: ", result);
+      
     }
   };
 
@@ -57,8 +61,9 @@ export default function ChangeEmail() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Account Settings
+            Change Email
           </Typography>
+          {auth && <span >Current: {auth.email}</span>}
           <TextField
             margin="normal"
             required

@@ -85,7 +85,7 @@ export default function Menubar({ check, change }) {
             <Datetime />
           </Grid>
           <Grid item xs={2} container alignItems="center">
-          <span className={styles.iconaccounttext}>Hi {currentUser.email}</span>
+          {currentUser && <span className={styles.iconaccounttext}>Hi {currentUser.email}</span>}
           </Grid> 
           <Grid item xs={1} container alignItems="center">
             <Switch checked={check} onChange={change} />
