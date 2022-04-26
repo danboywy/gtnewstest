@@ -81,9 +81,12 @@ export default function Menubar({ check, change }) {
               </div>
             </Link>
           </Grid>
-          <Grid item md={3} lg={4} container alignItems="center">
+          <Grid item md={1.5} lg={2.5} container alignItems="center">
             <Datetime />
           </Grid>
+          <Grid item xs={2} container alignItems="center">
+          <span className={styles.iconaccounttext}>Hi {currentUser.email}</span>
+          </Grid> 
           <Grid item xs={1} container alignItems="center">
             <Switch checked={check} onChange={change} />
             <span className={styles.switchtext}>Dark mode</span>
@@ -114,7 +117,7 @@ export default function Menubar({ check, change }) {
           {!currentUser &&<Grid item xs={3} container></Grid>}
           <Grid
             item
-            xs={1.5}
+            xs={1}
             container
             alignItems="center"
             justifyContent="center"
@@ -125,7 +128,7 @@ export default function Menubar({ check, change }) {
                 <img src={photoURL} alt="Avatar" className={styles.avatar} />
               </IconButton>
               <br></br>
-              <span className={styles.iconaccounttext}>{currentUser.email}</span>
+              <span className={styles.iconaccounttext}>Account</span>
             </div>}
 
              {/*-----------login----------*/}
