@@ -67,6 +67,7 @@ export default function AccountSettings() {
               name="likedGames"
               fullWidth
               variant="contained"
+              href="changeGames"
               sx={{ mt: 3, mb: 2 }}
             >
               Change Liked Games
@@ -75,6 +76,7 @@ export default function AccountSettings() {
               name="likedTech"
               fullWidth
               variant="contained"
+              href="changeTech"
               sx={{ mt: 3, mb: 2 }}
             >
               Change Liked Tech

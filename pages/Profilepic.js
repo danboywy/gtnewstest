@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
 export default function Profile() {
   const currentUser = useAuth();
   const [photo, setPhoto] = useState(null);
