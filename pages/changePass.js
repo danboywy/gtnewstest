@@ -66,7 +66,7 @@ export default function ChangePass() {
             fullWidth
             name="old-pass"
             label="Old Password"
-            type="old-pass"
+            type="password"
             autoComplete="old-pass"
             onChange={oldPassUpdate}
           />
@@ -76,7 +76,7 @@ export default function ChangePass() {
             fullWidth
             name="new-pass"
             label="New Password"
-            type="new-pass"
+            type="password"
             autoComplete="new-pass"
             onChange={newPassUpdate}
           />
