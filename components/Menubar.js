@@ -71,7 +71,7 @@ export default function Menubar({ check, change }) {
         <Grid item xs={12} container>
           <Grid item xs={0.5} container></Grid>
           <Grid item md={2} lg={1} container alignItems="center">
-            <Link href="/">
+        
               <div className={styles.gtnews_logo}>
                 <img
                   className={styles.gtnewslogo}
@@ -79,7 +79,7 @@ export default function Menubar({ check, change }) {
                   alt="GTNews"
                 ></img>
               </div>
-            </Link>
+           
           </Grid>
           <Grid item md={1.5} lg={2.5} container alignItems="center">
             <Datetime />

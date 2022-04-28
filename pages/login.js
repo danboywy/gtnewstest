@@ -44,7 +44,7 @@ export default function SignIn() {
     setLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
-      router.push('/')
+      router.push('../gameNews')
     } catch (err) {
       setError(err.message)
     }
