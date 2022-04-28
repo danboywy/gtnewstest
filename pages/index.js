@@ -44,14 +44,14 @@ export default function Home() {
               </Typography>
               {!currentUser && (
                 <Container maxWidth="xs">
-                  <Link href="/login">
+                  <Link href="/authContext">
                   <Button
                     name="LogIn"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Sign Up/Log In
+                    Sign Up
                   </Button>
                   </Link>
                 </Container>

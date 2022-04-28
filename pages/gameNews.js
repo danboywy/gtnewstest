@@ -5,6 +5,8 @@ import { ThumbUp } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import ShareIcon from '@mui/icons-material/Share';
 import { LikeButton } from '@lyket/react';
+import { UpdownButton } from '@lyket/react';
+
 import { Provider } from '@lyket/react';
 import {
     FacebookShareButton,
@@ -41,7 +43,7 @@ export const Feed = ({ articles, pageNumber }) => {
                     <div key={index} className={styles.post}>
                         
                         {!!article.urlToImage && <img src={article.urlToImage} />}
-                        <h1 onClick={() => (window.location.href = article.url)}>{article.title}</h1>
+                        <h1  target="_blank" onClick={() => window.open((window.location.href = article.url, '_blank'))}>{article.title}</h1>
 
                         <p style = {{ fontSize:"21px"}}>{article.description}</p>
                        
@@ -79,11 +81,14 @@ export const Feed = ({ articles, pageNumber }) => {
 </EmailShareButton>
 
 
-             <a style = {{paddingLeft:"10px", fontWeight:"bold"}}  href={article.url} > Read more </a> 
+             <a style = {{paddingLeft:"15px", fontWeight:"bold", fontSize: "20px"}} target="_blank" href={article.url} > Read more </a> 
              <Provider apiKey="pt_4fb580ae0cf8c7b4ea9108775afd4f">
-              <LikeButton
+            <div style = {{ fontSize: "20px"}}> <UpdownButton
+        id="article"
+        namespace="post"
+      /> </div>
         
-      />
+      
               </Provider>
                     </div>
                     </div>
@@ -108,7 +113,7 @@ export const getServerSideProps = async pageContext => {
 
       const keywords =  ["Halo"];
     const apiResponse = await fetch(
-        'https://newsapi.org/v2/everything?q=' + keywords.join(" OR ") + '&language=en&pageSize=5&page=${pageNumber}',
+        'https://newsapi.org/v2/everything?q=' + keywords.join(" OR ") + '&language=en&pageSize=20&page=${pageNumber}',
         {
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
