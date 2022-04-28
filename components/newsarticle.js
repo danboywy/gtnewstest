@@ -6,12 +6,22 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import ShareIcon from '@mui/icons-material/Share';
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import ShareIcon from "@mui/icons-material/Share";
 import Box from "@material-ui/core/Box";
 import { ThumbUp } from "@mui/icons-material";
 import { Container } from "@mui/material";
 //import { Link } from 'react-router-dom';
+import { useRouter } from "next/router";
+import { LikeButton } from "@lyket/react";
+import { Provider } from "@lyket/react";
+import { FacebookShareButton, FacebookIcon } from "next-share";
+
+import { RedditShareButton, RedditIcon } from "next-share";
+
+import { TwitterShareButton, TwitterIcon } from "next-share";
+
+import { EmailShareButton, EmailIcon } from "next-share";
 
 export default function NewsCard(props) {
   return (
@@ -41,19 +51,47 @@ export default function NewsCard(props) {
       <CardActions>
         <Container>
           <Box px={2} mt={-1} pl={60}>
-            <IconButton>
-              <ThumbUp />
-              <Typography variant="body1" color="green" pl={2}>
-                {props.likeNumber}
-              </Typography>
-            </IconButton>
+            <div style={{ paddingLeft: "60%" }}>
+              <FacebookShareButton
+                url={"https://github.com/next-share"}
+                quote={
+                  "next-share is a social share buttons for your next React apps."
+                }
+                hashtag={"#nextshare"}
+              >
+                <FacebookIcon size={40} round />
+              </FacebookShareButton>
 
-            <IconButton>
-              <ShareIcon />
-            </IconButton>
-            <IconButton>
-              <FavoriteBorderRoundedIcon />
-            </IconButton>
+              <TwitterShareButton
+                url={"https://github.com/next-share"}
+                title={
+                  "next-share is a social share buttons for your next React apps."
+                }
+              >
+                <TwitterIcon size={40} round />
+              </TwitterShareButton>
+
+              <RedditShareButton
+                url={"https://github.com/next-share"}
+                title={
+                  "next-share is a social share buttons for your next React apps."
+                }
+              >
+                <RedditIcon size={40} round />
+              </RedditShareButton>
+
+              <EmailShareButton
+                url={"https://github.com/next-share"}
+                subject={"Next Share"}
+                body="body"
+              >
+                <EmailIcon size={40} round />
+              </EmailShareButton>
+
+              <Provider apiKey="pt_4fb580ae0cf8c7b4ea9108775afd4f">
+                <LikeButton />
+              </Provider>
+            </div>
             <Button sx={{ left: 20 }} href={props.link} target="_blank">
               {" "}
               Read more
