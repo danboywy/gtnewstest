@@ -14,6 +14,7 @@ import {
   reauthenticateWithCredential,
   sendPasswordResetEmail
 } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -134,4 +135,8 @@ export async function changePass(currentUser, newPass, oldPass) {
   } finally {
     return success;
   }
+}
+
+export function initDB() {
+  return getDatabase(app);
 }
