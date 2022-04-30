@@ -85,7 +85,7 @@ export default function AccountSettings() {
               name="return"
               fullWidth
               variant="contained"
-              href={retVal}
+              href= 'gameNews'
               sx={{ mt: 3, mb: 2 }}
             >
               Return

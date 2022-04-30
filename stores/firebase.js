@@ -76,7 +76,7 @@ export function forgotPassword (email){
    return sendPasswordResetEmail(auth,email);
  }
 
-export async function changeEmail(currentUser, newEmail, pass) {
+ export async function changeEmail(currentUser, newEmail, pass) {
   //console.log("Email before: ", currentUser.email, "\n")
   const credential = EmailAuthProvider.credential(currentUser.email, pass);
   var test = false;
@@ -96,8 +96,7 @@ export async function changeEmail(currentUser, newEmail, pass) {
   } catch (error) {
     console.log("Error: ", error.message);
     if (error.message == "Firebase: Error (auth/wrong-password).") {
-      pass = prompt("Invalid password");
-      changeEmail(currentUser, newEmail, pass);
+      console.log("invalid password");
     } else if (error.message == "Firebase: Error (auth/internal-error).") {
       console.log("cancelled out");
     }

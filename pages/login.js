@@ -57,9 +57,23 @@ export default function SignIn() {
     try {
       await logout();
     } catch (err) {
-      setError(err.message)
-    }
-    setLoading(false);
+      const msg = err.message;
+      if (msg === "Firebase: Error (auth/invalid-email)." || msg === "Firebase: Error (auth/missing-email).") {
+        setError("Invalid email.");
+      }
+      else if (msg === "Firebase: Password should be at least 6 characters (auth/weak-password).") {
+        setError("Password should be at least 6 characters.");
+      }
+      else if (msg === "Firebase: Error (auth/internal-error).") {
+        setError("Invalid password.");
+      }
+      else if (msg === "Firebase: Error (auth/email-already-in-use).") {
+        setError("Email is already in use.");
+      }
+      else {
+        setError(err.message)
+      }
+      }
   }
   return (
     <ThemeProvider theme={theme}>

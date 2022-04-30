@@ -50,10 +50,21 @@ function Copyright(props) {
       await signup(emailRef.current.value, passwordRef.current.value);
       router.push('../gameSelection')
      } catch (err) {
-       setError(err.message)
+      const msg = err.message;
+      if (msg === "Firebase: Error (auth/wrong-password)." || msg === "Firebase: Error (auth/internal-error).") {
+        setError("Wrong password. Try again.");
+      }
+      else if (msg === "Firebase: Error (auth/invalid-email).") {
+        setError("Invalid email.");
+      }
+      else if (msg === "Firebase: Error (auth/user-not-found).") {
+        setError("User not found.");
+      }
+      else {
+        setError(err.message)
+      }
     }
-    setLoading(false);
-  }
+}
       
     return (
       <ThemeProvider theme={theme}>

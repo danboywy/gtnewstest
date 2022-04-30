@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth, changeEmail } from "../stores/firebase";
 import { setRetVal } from "../pages/accountSettings";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { Paper } from "@material-ui/core";
 const theme = createTheme();
 var eRetVal = "";
@@ -32,69 +32,83 @@ export default function ChangeEmail() {
 
   const HandleSubmit = async (event) => {
     console.log("test123\n");
-    var pass = prompt("Enter password");
+    var pass = document.getElementById("pass").value;
     var result = await changeEmail(auth, newEmail, pass);
     console.log("after change email: ", result);
     if (result) {
-      router.reload()
       document.getElementById("retbutton").innerHTML = "Done";
       console.log("after email change: ", result);
-      
+      document.getElementById("errmsg").innerHTML =
+        "Email Successfully Updated";
+      router.reload();
+    } else {
+      document.getElementById("errmsg").innerHTML = "Invalid Password";
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-        <Paper style={{ height: "100vh" }}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          onSubmit={HandleSubmit}
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Change Email
-          </Typography>
-          {auth && <span >Current: {auth.email}</span>}
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="new-email"
-            label="New Email"
-            type="new-email"
-            autoComplete="new-email"
-            onChange={newEmailUpdate}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            onClick={HandleSubmit}
-            sx={{ mt: 3, mb: 2 }}
+      <Paper style={{ height: "100vh" }}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            onSubmit={HandleSubmit}
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
           >
-            Submit
-          </Button>
-          <Button
-            name="return"
-            fullWidth
-            variant="contained"
-            href="accountSettings"
-            id="retbutton"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Return
-          </Button>
-        </Box>
-      </Container>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Change Email
+            </Typography>
+            {auth && <span>Current: {auth.email}</span>}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="new-email"
+              label="New Email"
+              type="new-email"
+              autoComplete="new-email"
+              onChange={newEmailUpdate}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+              name="Password"
+              type="password"
+              autoComplete="pass"
+              id="pass"
+            />
+            <Typography component="h1" variant="h5" id="errmsg"></Typography>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={HandleSubmit}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Submit
+            </Button>
+            <Button
+              name="return"
+              fullWidth
+              variant="contained"
+              href="accountSettings"
+              id="retbutton"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Return
+            </Button>
+          </Box>
+        </Container>
       </Paper>
     </ThemeProvider>
   );

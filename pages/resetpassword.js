@@ -47,7 +47,20 @@ async function forgotPasswordHandler() {
     document.getElementById("alert").innerHTML = "A password reset link was sent. Click the link in the email.";
     document.getElementById("retbutton").innerHTML = "Done";
   } catch (err) {
-    setError(err.message)
+    const msg = err.message;
+    if (msg === "Firebase: Error (auth/invalid-email)." || msg === "Firebase: Error (auth/missing-email).") {
+      setError("Invalid email.");
+    }
+    else if (msg === "Firebase: Error (auth/missing-email).") {
+      setError("Please enter your email");
+    }
+    else if (msg === "Firebase: Error (auth/internal-error).") {
+      setError("Invalid password.");
+    }
+    else {
+      setError(err.message)
+    }
+
   }setLoading(false);
   }
   return (
