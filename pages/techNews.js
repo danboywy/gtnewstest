@@ -27,7 +27,7 @@ export const Feed = ({ articles, pageNumber }) => {
           <div key={index} className={styles.post}>
             {!!article.urlToImage && <img src={article.urlToImage} />}
             <h1
-              target="_blank"
+            
               onClick={() =>
                 window.open(((window.location.href = article.url), "_blank"))
               }
@@ -80,18 +80,13 @@ export const Feed = ({ articles, pageNumber }) => {
                   fontWeight: "bold",
                   fontSize: "20px"
                 }}
-                target="_blank"
+               
                 href={article.url}
               >
                 {" "}
                 Read more{" "}
               </a>
-              <Provider apiKey="pt_4fb580ae0cf8c7b4ea9108775afd4f">
-                <div style={{ fontSize: "20px" }}>
-                  {" "}
-                  <UpdownButton id="article" namespace="post" />{" "}
-                </div>
-              </Provider>
+              
             </div>
           </div>
         ))}
