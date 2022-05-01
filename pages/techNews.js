@@ -223,7 +223,7 @@ export default function Feed() {
           <div key={index} className={styles.post}>
             {!!article.urlToImage && <img src={article.urlToImage} />}
             <h1
-              
+              target="_blank"
               onClick={() =>
                 window.open(((window.location.href = article.url), "_blank"))
               }
@@ -276,8 +276,8 @@ export default function Feed() {
                   fontWeight: "bold",
                   fontSize: "20px"
                 }}
-            
-                href={article.url}
+                
+                href={article.url} target="_blank"
               >
                 {" "}
                 Read more{" "}
