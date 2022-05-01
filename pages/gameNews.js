@@ -257,7 +257,7 @@ export default function Feed() {
         <div key={index} className={styles.post}>
 
         {!!article.urlToImage && <img src={article.urlToImage} />}
-        <h1  target="_blank" onClick={() => window.open((window.location.href = article.url, '_blank'))}>{article.title}</h1>
+        <h1   onClick={() => window.open((window.location.href = article.url, '_blank'))}>{article.title}</h1>
 
         <p style = {{ fontSize:"21px"}}>{article.description}</p>
 
@@ -295,7 +295,7 @@ export default function Feed() {
         </EmailShareButton>
 
 
-        <a style = {{paddingLeft:"15px", fontWeight:"bold", fontSize: "20px"}}  href={article.url} target="_blank"> Read more </a> 
+        <a style = {{paddingLeft:"15px", fontWeight:"bold", fontSize: "20px"}}  href={article.url} > Read more </a> 
         <Provider apiKey="pt_4fb580ae0cf8c7b4ea9108775afd4f">
         <div style = {{ fontSize: "20px"}}> <UpdownButton
         id="article"

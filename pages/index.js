@@ -11,6 +11,7 @@ import {useAuth} from '../stores/firebase'
 import NewsCard from "../components/newsarticle";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
+
 const theme = createTheme();
 
 export default function Home() {
@@ -57,28 +58,7 @@ export default function Home() {
                 </Container>
               )}
 
-              {currentUser && (
-                <div>
-                  <br></br>
-                  <br></br>
-                  <Typography textAlign="center">
-                    Now that you are all set up with an account, choose some
-                    video games and technology companies to follow so we can
-                    show you news based on your interests!
-                  </Typography>
-                  <Container maxWidth="xs">
-                    <Button
-                      name="gameSelection"
-                      fullWidth
-                      variant="contained"
-                      href="gameSelection"
-                      sx={{ mt: 3, mb: 2 }}
-                    >
-                      Choose Games/Tech To Follow
-                    </Button>
-                  </Container>
-                </div>
-              )}
+              
             </Box>
           </Container>
         </ThemeProvider>

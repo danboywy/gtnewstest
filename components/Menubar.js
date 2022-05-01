@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import ActiveLink from "./ActiveLink";
 import { useRouter } from 'next/router'
 import { setRetVal } from "../pages/accountSettings";
+
 export default function Menubar({ check, change }) {
   const currentUser = useAuth();
   const router = useRouter()
