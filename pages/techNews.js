@@ -54,7 +54,7 @@ export const Feed = ({ articles, pageNumber }) => {
 
 export const getServerSideProps = async (pageContext) => {
 
-  const pageNumber = pageContext.query.id;
+  const pageNumber = 0;
 
   {
 
