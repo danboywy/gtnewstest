@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth, changePass } from "../stores/firebase";
-import { Paper } from "@material-ui/core";
+import { setRetVal } from "../pages/accountSettings";
 
 const theme = createTheme();
 var pRetVal = "";
@@ -37,12 +37,13 @@ export default function ChangePass() {
     console.log("result: ", result);
     if (result) {
       document.getElementById("retbutton").innerHTML = "Done";
+      document.getElementById("res").innerHTML =
+        "Successfully Changed Password";
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "100vh" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -58,7 +59,7 @@ export default function ChangePass() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Change Password
+            Account Settings
           </Typography>
           <TextField
             margin="normal"
@@ -81,6 +82,8 @@ export default function ChangePass() {
             onChange={newPassUpdate}
           />
 
+          <Typography component="h1" variant="h5" id="res"></Typography>
+
           <Button
             type="submit"
             fullWidth
@@ -96,13 +99,13 @@ export default function ChangePass() {
             variant="contained"
             href="accountSettings"
             sx={{ mt: 3, mb: 2 }}
-            id="retbutton"  
+            id="retbutton"
+            onClick={setRetVal(pRetVal)}
           >
             Return
           </Button>
         </Box>
       </Container>
-      </Paper>
     </ThemeProvider>
   );
 }
