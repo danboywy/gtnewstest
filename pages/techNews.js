@@ -276,7 +276,7 @@ export default function Feed() {
                   fontWeight: "bold",
                   fontSize: "20px"
                 }}
-                target="_blank"
+            
                 href={article.url}
               >
                 {" "}

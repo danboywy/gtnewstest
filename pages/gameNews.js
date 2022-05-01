@@ -257,7 +257,7 @@ export default function Feed() {
         <div key={index} className={styles.post}>
 
         {!!article.urlToImage && <img src={article.urlToImage} />}
-        <h1  target="_blank" onClick={() => window.open((window.location.href = article.url, '_blank'))}>{article.title}</h1>
+        <h1   onClick={() => window.open((window.location.href = article.url, '_blank'))}>{article.title}</h1>
 
         <p style = {{ fontSize:"21px"}}>{article.description}</p>
 
