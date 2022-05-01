@@ -29,7 +29,7 @@ export const Feed = ({ articles, pageNumber }) => {
             <h1
             
               onClick={() =>
-                window.open(((window.location.href = article.url), "_blank"))
+                window.open(((window.location.href = article.url)))
               }
             >
               {article.title}
@@ -38,54 +38,12 @@ export const Feed = ({ articles, pageNumber }) => {
             <p style={{ fontSize: "21px" }}>{article.description}</p>
 
             <div style={{ paddingLeft: "60%" }}>
-              <FacebookShareButton
-                url={"https://github.com/next-share"}
-                quote={
-                  "next-share is a social share buttons for your next React apps."
-                }
-                hashtag={"#nextshare"}
-              >
-                <FacebookIcon size={40} round />
-              </FacebookShareButton>
+              
+             
 
-              <TwitterShareButton
-                url={"https://github.com/next-share"}
-                title={
-                  "next-share is a social share buttons for your next React apps."
-                }
-              >
-                <TwitterIcon size={40} round />
-              </TwitterShareButton>
+              
 
-              <RedditShareButton
-                url={"https://github.com/next-share"}
-                title={
-                  "next-share is a social share buttons for your next React apps."
-                }
-              >
-                <RedditIcon size={40} round />
-              </RedditShareButton>
-
-              <EmailShareButton
-                url={"https://github.com/next-share"}
-                subject={"Next Share"}
-                body="body"
-              >
-                <EmailIcon size={40} round />
-              </EmailShareButton>
-
-              <a
-                style={{
-                  paddingLeft: "15px",
-                  fontWeight: "bold",
-                  fontSize: "20px"
-                }}
-               
-                href={article.url}
-              >
-                {" "}
-                Read more{" "}
-              </a>
+            
               
             </div>
           </div>
