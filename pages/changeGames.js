@@ -93,8 +93,21 @@ function updateGames() {
 
   // console.log(list);
 
-  const userId = JSON.parse(window.localStorage.getItem("uid"));
-  updateUserData(userId, list);
+  // const userId = JSON.parse(window.localStorage.getItem("uid"));
+
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user);
+      const userId = user.uid;
+      console.log(userId);
+
+      updateUserData(userId, list);
+    } 
+    else {
+      console.log("Error while getting the user ID.");  
+    }
+  });
 }
 
 function toggle(id) {

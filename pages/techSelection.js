@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { ref, set } from "firebase/database";
 import { initDB } from "../stores/firebase";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 var clickFlag = {
   BigTech: [false, false, false, false, false, false, false, false],
@@ -109,22 +109,28 @@ async function getList() {
   console.log(gameList);
   console.log(techList);
 
-  const auth = getAuth();
-  // console.log(auth);
-  const user = auth.currentUser;
-  // console.log(user);
-  const uid = user.uid;
-  // console.log(uid);
+  // const auth = getAuth();
+  // // console.log(auth);
+  // const user = auth.currentUser;
+  // // console.log(user);
+  // const uid = user.uid;
+  // // console.log(uid);
   
-  writeUserData(uid, gameList, techList);
+  // writeUserData(uid, gameList, techList);
 
-  localStorage.clear();
+  // localStorage.clear();
 
-  // this is not good but getting uid in other pages fails
-  /*window.localStorage.setItem(
-    "uid",
-    JSON.stringify(uid)
-  );*/
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      writeUserData(uid, gameList, techList);
+      localStorage.clear();
+    } 
+    else {
+      console.log("Error while getting the user ID.");  
+    }
+  });
 }
 
 function writeUserData(userId, games, tech) {
