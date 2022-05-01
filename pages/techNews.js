@@ -14,7 +14,7 @@ export const Feed = ({ articles, pageNumber }) => {
             <h1
             
               onClick={() =>
-                window.open(((window.location.href = article.url), "_blank"))
+                window.open(window.location.href = article.url)
               }
             >
               {article.title}
