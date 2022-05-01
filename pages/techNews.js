@@ -1,20 +1,6 @@
 import styles from "../styles/Feed.module.css";
 import { useRouter } from "next/router";
-import IconButton from "@mui/material/IconButton";
-import { ThumbUp } from "@mui/icons-material";
-import Typography from "@mui/material/Typography";
-import ShareIcon from "@mui/icons-material/Share";
-import { LikeButton } from "@lyket/react";
-import { UpdownButton } from "@lyket/react";
 
-import { Provider } from "@lyket/react";
-import { FacebookShareButton, FacebookIcon } from "next-share";
-
-import { RedditShareButton, RedditIcon } from "next-share";
-
-import { TwitterShareButton, TwitterIcon } from "next-share";
-
-import { EmailShareButton, EmailIcon } from "next-share";
 
 export const Feed = ({ articles, pageNumber }) => {
   const router = useRouter();
@@ -28,7 +14,7 @@ export const Feed = ({ articles, pageNumber }) => {
             <h1
             
               onClick={() =>
-                window.open(((window.location.href = article.url)))
+                window.open(((window.location.href = article.url), "_blank"))
               }
             >
               {article.title}
@@ -37,12 +23,7 @@ export const Feed = ({ articles, pageNumber }) => {
             <p style={{ fontSize: "21px" }}>{article.description}</p>
 
             <div style={{ paddingLeft: "60%" }}>
-              
              
-
-              
-
-            
               
             </div>
           </div>
@@ -54,9 +35,10 @@ export const Feed = ({ articles, pageNumber }) => {
 
 export const getServerSideProps = async (pageContext) => {
 
-  const pageNumber = 0;
+ 
 
   {
+
 
     const articles = [
       {
@@ -260,7 +242,7 @@ export const getServerSideProps = async (pageContext) => {
     return {
       props: {
         articles,
-        pageNumber: Number.parseInt(pageNumber)
+        
       }
     };
   }
