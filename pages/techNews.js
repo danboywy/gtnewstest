@@ -18,8 +18,7 @@ import { EmailShareButton, EmailIcon } from "next-share";
 
 export const Feed = ({ articles, pageNumber }) => {
   const router = useRouter();
-  //const gameNames = ["Halo", "LeagueOfLegends", "CallofDuty"];
-  //for (let index = 0; index < gameNames.length; index++) {
+
   return (
     <>
       <div className={styles.main}>
@@ -54,25 +53,10 @@ export const Feed = ({ articles, pageNumber }) => {
 };
 
 export const getServerSideProps = async (pageContext) => {
-  //for (let index = 0; index < gameNames.length; index++) {
+
   const pageNumber = pageContext.query.id;
 
   {
-    // const keywords = ["Apple", "Amazon", "Microsoft", "Tesla"];
-    // const apiResponse = await fetch(
-    //   "https://newsapi.org/v2/everything?q=" +
-    //     keywords.join(" OR ") +
-    //     "&language=en&pageSize=20&page=${pageNumber}",
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`
-    //     }
-    //   }
-    // );
-
-    // const json = await apiResponse.json();
-    // console.log(json);
-    // const { articles } = json;
 
     const articles = [
       {
