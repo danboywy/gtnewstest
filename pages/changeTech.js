@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import { getDatabase, ref, onValue, update } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 var clickFlag = {
   BigTech: [false, false, false, false, false, false, false, false],
@@ -23,6 +25,15 @@ const tech = {
 
 const categories = ["BigTech", "Hardware", "GameDevelopers"];
 
+function updateUserData(userId, tech) {
+  const db = getDatabase();
+
+  const updates = {};
+  updates["/Selection Info/" + userId + "/Tech"] = tech;
+
+  update(ref(db), updates);
+}
+
 function updateTech() {
   var list = [];
 
@@ -34,8 +45,10 @@ function updateTech() {
     }
   }
 
-  // here is where we would update the database
-  console.log(list);
+  // console.log(list);
+
+  const userId = JSON.parse(window.localStorage.getItem("uid"));
+  updateUserData(userId, list);
 }
 
 function toggle(id) {
@@ -55,22 +68,45 @@ function toggle(id) {
   }
 }
 
-function displayCurrentSelection() {
-  // here is where we would pull from the database
-  var example = [
-    "Tesla",
-    "Amazon",
-    "Netflix",
-    "Intel",
-    "AMD",
-    "Valve",
-    "Epic Games"
-  ];
+function pullTech() {
+  const myPromise = new Promise(function(success, fail) {
+    // const userId = JSON.parse(window.localStorage.getItem("uid"));
 
-  for (var i = 0; i < example.length; i++) {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userId = user.uid;
+        const db = getDatabase();
+        const techRef = ref(db, "Selection Info/" + userId + "/Tech");
+
+        onValue(techRef, (snapshot) => {
+          const data = snapshot.val();
+          // console.log("data", data);
+
+          if (data != null) {
+            success(data);
+          }
+          else {
+            fail("Error while pulling data from database.");
+          }
+        });
+      }
+      else {
+        console.log("Error while getting the user ID.");
+      }
+    });
+  });
+
+  return myPromise;
+}
+
+function displayCurrentSelection(userTech) {
+  // console.log("userTech", userTech);
+  
+  for (var i = 0; i < userTech.length; i++) {
     for (var j = 0; j < categories.length; j++) {
       for (var k = 0; k < tech["BigTech"].length; k++) {
-        if (example[i] === tech[categories[j]][k]) {
+        if (userTech[i] === tech[categories[j]][k]) {
           toggle(k + categories[j]);
         }
       }
@@ -146,7 +182,10 @@ export default function TechSelectionPage() {
 
   // called when page loads
   useEffect(() => {
-    displayCurrentSelection();
+    pullTech().then(
+      function(value) { displayCurrentSelection(value); },
+      function(error) { console.log(error); }
+    );
   }, []);
 
   return (

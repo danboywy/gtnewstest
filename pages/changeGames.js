@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import { getDatabase, ref, onValue, update } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 var clickFlag = {
   Shooter: [false, false, false, false, false, false, false, false],
@@ -66,6 +68,18 @@ const games = {
 
 const categories = ["Shooter", "MOBA", "Sports", "RPG", "Racing"];
 
+// var userId = null;
+
+
+function updateUserData(userId, games) {
+  const db = getDatabase();
+
+  const updates = {};
+  updates["/Selection Info/" + userId + "/Games"] = games;
+
+  update(ref(db), updates);
+}
+
 function updateGames() {
   var list = [];
 
@@ -77,8 +91,10 @@ function updateGames() {
     }
   }
 
-  // here is where we would update the database
-  console.log(list);
+  // console.log(list);
+
+  const userId = JSON.parse(window.localStorage.getItem("uid"));
+  updateUserData(userId, list);
 }
 
 function toggle(id) {
@@ -98,36 +114,90 @@ function toggle(id) {
   }
 }
 
-function displayCurrentSelection() {
-  // here is where we would pull from the database
-  var example = [
-    "Counter-Strike: Global Offensive",
-    "Fortnite",
-    "Dota 2",
-    "Smite",
-    "Halo Infinite",
-    "Overwatch",
-    "Paladins",
-    "FIFA 22",
-    "NBA 2K22",
-    "Rocket League",
-    "MLB The Show 21",
-    "Tony Hawk's Pro Skater 1 + 2",
-    "Assassin's Creed Valhalla",
-    "Fallout 4",
-    "The Witcher 3: Wild Hunt",
-    "The Elder Scrolls V: Skyrim",
-    "Stardew Valley",
-    "Forza Horizon 5",
-    "iRacing",
-    "Gran Turismo 7",
-    "F1 2020"
-  ];
+/*function setUserID(id) {
+  userId = id;
+}
 
-  for (var i = 0; i < example.length; i++) {
+function getUserID() {
+  const myPromise = new Promise(function(successful, failed) {
+    const auth = getAuth();
+    // console.log("auth: ", auth);
+    // const userId = auth.currentUser.uid;
+
+    onAuthStateChanged(auth, (user) => {
+      // const data = snapshot.val();
+      console.log("user: ", user);
+
+      if (user != null) {
+        successful(user.uid);
+      }
+      else {
+        failed("Error while getting the user ID.");
+      }
+    });
+  });
+
+  return myPromise;
+}*/
+
+function pullGames() {
+  const myPromise = new Promise(function(success, fail) {
+    // const userId = JSON.parse(window.localStorage.getItem("uid"));
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        const userId = user.uid;
+        console.log(userId);
+
+        const db = getDatabase();
+        const gamesRef = ref(db, "Selection Info/" + userId + "/Games");
+        onValue(gamesRef, (snapshot) => {
+          const data = snapshot.val();
+          // console.log("data", data);
+      
+          if (data != null) {
+            success(data);
+          }
+          else {
+            fail("Error while pulling data from database.");
+          }
+        });
+      } 
+      else {
+        console.log("Error while getting the user ID.");  
+      }
+    });
+
+    /*console.log(userId);
+    console.log("TEST");
+
+    const db = getDatabase();
+    const gamesRef = ref(db, "Selection Info/" + userId + "/Games");
+    onValue(gamesRef, (snapshot) => {
+      const data = snapshot.val();
+      // console.log("data", data);
+  
+      if (data != null) {
+        success(data);
+      }
+      else {
+        fail("Error while pulling data from database.");
+      }
+    });*/
+  });
+
+  return myPromise;
+}
+
+function displayCurrentSelection(userGames) {
+  // console.log("userGames", userGames);
+
+  for (var i = 0; i < userGames.length; i++) {
     for (var j = 0; j < categories.length; j++) {
       for (var k = 0; k < games["Shooter"].length; k++) {
-        if (example[i] === games[categories[j]][k]) {
+        if (userGames[i] === games[categories[j]][k]) {
           toggle(k + categories[j]);
         }
       }
@@ -232,8 +302,11 @@ export default function GameSelectionPage() {
 
   // called when page loads
   useEffect(() => {
-    displayCurrentSelection();
-  }, []);
+    pullGames().then(
+      function(value) { displayCurrentSelection(value); },
+      function(error) { console.log(error); }
+    );
+  }, []); 
 
   return (
     <div>

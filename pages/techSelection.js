@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import { ref, set } from "firebase/database";
+import { initDB } from "../stores/firebase";
+import { getAuth } from "firebase/auth";
 
 var clickFlag = {
   BigTech: [false, false, false, false, false, false, false, false],
@@ -23,7 +26,7 @@ const tech = {
 
 const categories = ["BigTech", "Hardware", "GameDevelopers"];
 
-function getList() {
+async function getList() {
   var techList = [];
   var gameList = [];
 
@@ -106,7 +109,31 @@ function getList() {
   console.log(gameList);
   console.log(techList);
 
+  const auth = getAuth();
+  // console.log(auth);
+  const user = auth.currentUser;
+  // console.log(user);
+  const uid = user.uid;
+  // console.log(uid);
+  
+  writeUserData(uid, gameList, techList);
+
   localStorage.clear();
+
+  // this is not good but getting uid in other pages fails
+  /*window.localStorage.setItem(
+    "uid",
+    JSON.stringify(uid)
+  );*/
+}
+
+function writeUserData(userId, games, tech) {
+  const db = initDB();
+
+  set(ref(db, 'Selection Info/' + userId), {
+    Games: games,
+    Tech: tech
+  });
 }
 
 function toggle(id) {
@@ -224,6 +251,7 @@ export default function TechSelectionPage() {
       JSON.stringify(currentSelection)
     );
   }, [currentSelection]);
+
 
   return (
     <div>
