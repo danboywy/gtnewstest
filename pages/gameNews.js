@@ -85,7 +85,7 @@ export const Feed = ({ articles, pageNumber }) => {
 </EmailShareButton>
 
 
-             <a style = {{paddingLeft:"15px", fontWeight:"bold", fontSize: "20px"}} target="_blank" href={article.url} > Read more </a> 
+             <a style = {{paddingLeft:"15px", fontWeight:"bold", fontSize: "20px"}}  href={article.url} > Read more </a> 
              <Provider apiKey="pt_4fb580ae0cf8c7b4ea9108775afd4f">
             <div style = {{ fontSize: "20px"}}> <UpdownButton
         id="article"
