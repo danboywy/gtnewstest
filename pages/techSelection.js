@@ -109,28 +109,28 @@ async function getList() {
   console.log(gameList);
   console.log(techList);
 
-  // const auth = getAuth();
-  // // console.log(auth);
-  // const user = auth.currentUser;
-  // // console.log(user);
-  // const uid = user.uid;
-  // // console.log(uid);
-  
-  // writeUserData(uid, gameList, techList);
-
-  // localStorage.clear();
-
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      writeUserData(uid, gameList, techList);
-      localStorage.clear();
-    } 
-    else {
-      console.log("Error while getting the user ID.");  
-    }
-  });
+  // console.log(auth);
+  const user = auth.currentUser;
+  // console.log(user);
+  const uid = user.uid;
+  // console.log(uid);
+  
+  writeUserData(uid, gameList, techList);
+
+  localStorage.clear();
+
+  // const auth = getAuth();
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     const uid = user.uid;
+  //     writeUserData(uid, gameList, techList);
+  //     localStorage.clear();
+  //   } 
+  //   else {
+  //     console.log("Error while getting the user ID.");  
+  //   }
+  // });
 }
 
 function writeUserData(userId, games, tech) {
